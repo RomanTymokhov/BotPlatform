@@ -14,6 +14,7 @@ namespace BotPlatform.Controllers
         [HttpGet("{id}")]
         public string Get(string id)
         {
+            //sborka
             ChatAnswer answer = new ChatAnswer();
             return answer.GetGenderAnswer(id);
         }
