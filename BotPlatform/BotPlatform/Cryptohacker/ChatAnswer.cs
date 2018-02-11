@@ -21,7 +21,7 @@ namespace BotPlatform.Cryptohacker
 
         public string GetGenderAnswer(string gender)
         {
-            if (gender == "mail")
+            if (gender == "m")
                  return JsonConvert.SerializeObject(PackageResponse(mailAnswers.ElementAt(Rnd(mailAnswers))));
             else return JsonConvert.SerializeObject(PackageResponse(femailAnswers.ElementAt(Rnd(femailAnswers))));
         }
