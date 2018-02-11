@@ -1,0 +1,32 @@
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+
+namespace BotPlatform.Responses
+{
+    public class TextResponse
+    {
+        [JsonProperty(PropertyName = "messages")]
+        public List<Message> textResponse;
+
+        public TextResponse()
+        {
+            textResponse = new List<Message>();
+        }
+
+        public void CreateResponse(Message msg)
+        {
+            textResponse.Add(msg);
+        }
+    }
+
+    public class Message
+    {
+        [JsonProperty(PropertyName = "text")]
+        public string message;
+
+        public Message(string msg)
+        {
+            message = msg;
+        }
+    }
+}

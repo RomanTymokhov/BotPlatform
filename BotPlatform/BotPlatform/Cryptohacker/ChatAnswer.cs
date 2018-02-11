@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BotPlatform.Responses;
+using Newtonsoft.Json;
 
 namespace BotPlatform.Cryptohacker
 {
@@ -20,8 +22,17 @@ namespace BotPlatform.Cryptohacker
         public string GetGenderAnswer(string gender)
         {
             if (gender == "mail")
-                return mailAnswers.ElementAt(Rnd(mailAnswers));
-            else return femailAnswers.ElementAt(Rnd(femailAnswers));
+                 return JsonConvert.SerializeObject(PackageResponse(mailAnswers.ElementAt(Rnd(mailAnswers))));
+            else return JsonConvert.SerializeObject(PackageResponse(femailAnswers.ElementAt(Rnd(femailAnswers))));
+        }
+
+        private TextResponse PackageResponse(string str)
+        {
+            TextResponse txtResp = new TextResponse();
+            Message msg = new Message(str);
+            txtResp.CreateResponse(msg);
+
+            return txtResp;
         }
 
         private void FillAnswers()
