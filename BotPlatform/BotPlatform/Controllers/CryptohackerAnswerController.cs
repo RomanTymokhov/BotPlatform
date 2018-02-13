@@ -26,7 +26,7 @@ namespace BotPlatform.Controllers
         }
 
         // POST api/values
-        [HttpPost]
+        [HttpGet]
         public string Post([FromBody]Message msg)
         {
             ChatAnswer answer = new ChatAnswer();
