@@ -14,19 +14,23 @@ namespace BotPlatform.Controllers
         [HttpGet]
         public string Get()
         {
-            ChatAnswer answer = new ChatAnswer();
-
             string gender = Request.Query.FirstOrDefault(p => p.Key == "gender").Value;
+            string usrName = Request.Query.FirstOrDefault(p => p.Key == "first name").Value;
 
-            return answer.GetGenderAnswer(gender);
+            return GetAnswer(gender, usrName);
         }
 
-        //// POST api/values
-        //[HttpGet]
-        //public string Post([FromBody]Message msg)
-        //{
-        //    //ChatAnswer answer = new ChatAnswer();
-        //    //return answer.GetGenderAnswer(msg.message);
-        //}
+        private string GetAnswer(string gender, string usrName)
+        {
+            string answer = null;
+
+            ChatAnswer chatAnswer = new ChatAnswer();
+
+            if(gender != null && usrName == null) answer = chatAnswer.GetGenderAnswer(gender);
+
+            if (gender != null && usrName != null) answer = chatAnswer.GetGenderNameAnswer(gender, usrName);
+
+            return answer;
+        }
     }
 }

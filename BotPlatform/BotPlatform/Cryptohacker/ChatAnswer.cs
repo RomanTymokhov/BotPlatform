@@ -9,21 +9,14 @@ namespace BotPlatform.Cryptohacker
 {
     public class ChatAnswer
     {
-        private List<string> mailAnswers;
-        private List<string> femailAnswers;
+        private List<string> maleAnswersToMax;
+        private List<string> femaleAnswersToMax;
 
         public ChatAnswer()
         {
-            mailAnswers = new List<string>();
-            femailAnswers = new List<string>();
+            maleAnswersToMax = new List<string>();
+            femaleAnswersToMax = new List<string>();
             FillAnswers();
-        }
-
-        public string GetGenderAnswer(string gender)
-        {
-            if (gender == "male")
-                 return JsonConvert.SerializeObject(PackageResponse(mailAnswers.ElementAt(Rnd(mailAnswers))));
-            else return JsonConvert.SerializeObject(PackageResponse(femailAnswers.ElementAt(Rnd(femailAnswers))));
         }
 
         private TextResponse PackageResponse(string str)
@@ -35,6 +28,15 @@ namespace BotPlatform.Cryptohacker
             return txtResp;
         }
 
+        #region Max --> Gender
+        //Логика ответа на имя бота с учетом гендерной принадлежности юзера
+        public string GetGenderAnswer(string gender)
+        {
+            if (gender == "male")
+                 return JsonConvert.SerializeObject(PackageResponse(maleAnswersToMax.ElementAt(Rnd(maleAnswersToMax))));
+            else return JsonConvert.SerializeObject(PackageResponse(femaleAnswersToMax.ElementAt(Rnd(femaleAnswersToMax))));
+        }
+
         private void FillAnswers()
         {
             FillMailAnswers();
@@ -43,16 +45,16 @@ namespace BotPlatform.Cryptohacker
 
         private void FillMailAnswers()
         {
-            mailAnswers.Add("Гей, ковбоє, полегше...");
-            mailAnswers.Add("Воув, хлопче, не так швидко...");
-            mailAnswers.Add("І що це ти написав?");
+            maleAnswersToMax.Add("Гей, ковбоє, полегше...");
+            maleAnswersToMax.Add("Воув, хлопче, не так швидко...");
+            maleAnswersToMax.Add("І що це ти написав?");
         }
 
         private void FillFemailAnswers()
         {
-            femailAnswers.Add("Гей, кралечко, полегше...");
-            femailAnswers.Add("Воув, дівонька, не так швидко...");
-            femailAnswers.Add("І що це ти написала?");
+            femaleAnswersToMax.Add("Гей, кралечко, полегше...");
+            femaleAnswersToMax.Add("Воув, дівонька, не так швидко...");
+            femaleAnswersToMax.Add("І що це ти написала?");
         }
 
         private int Rnd(List<string> answList)
@@ -61,5 +63,18 @@ namespace BotPlatform.Cryptohacker
 
             return rnd.Next(answList.Count);
         }
+        #endregion
+        #region Gender + Name
+        //Логика ответа с учетом гендерной принадлежности и имени
+
+        public string GetGenderNameAnswer(string gender, string usrName)
+        {
+            if (gender == "male")
+                return JsonConvert.SerializeObject(PackageResponse(usrName + " ти мене кликав?"));
+            else
+                return JsonConvert.SerializeObject(PackageResponse(usrName + " ти мене кликала,"));
+        }
+
+        #endregion
     }
 }
