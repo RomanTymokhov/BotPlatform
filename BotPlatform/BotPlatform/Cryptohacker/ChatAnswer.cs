@@ -72,7 +72,7 @@ namespace BotPlatform.Cryptohacker
             if (gender == "male")
                 return JsonConvert.SerializeObject(PackageResponse(usrName + " ти мене кликав?"));
             else
-                return JsonConvert.SerializeObject(PackageResponse(usrName + " ти мене кликала,"));
+                return JsonConvert.SerializeObject(PackageResponse(usrName + " ти мене кликала?"));
         }
 
         #endregion
