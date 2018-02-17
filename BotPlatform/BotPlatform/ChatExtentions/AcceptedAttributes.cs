@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
 using System.Linq;
 
 namespace BotPlatform.ChatExtentions
 {
-    public class AcceptedAttributes:Controller
+    public class AcceptedAttributes
     {
         public string LastUserFreeFormInput { get; set; }
         public string LastClickedButtonName { get; set; }
@@ -21,7 +21,7 @@ namespace BotPlatform.ChatExtentions
         public string Locale { get; set; }
         public string Ref { get; set; }
 
-        public AcceptedAttributes()
+        public AcceptedAttributes(HttpRequest Request)
         {
             LastUserFreeFormInput = Request.Query.FirstOrDefault(p => p.Key == "last user freeform input").Value;
             LastClickedButtonName = Request.Query.FirstOrDefault(p => p.Key == "last clicked button name").Value;

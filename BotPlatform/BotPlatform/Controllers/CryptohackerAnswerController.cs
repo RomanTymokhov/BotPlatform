@@ -15,7 +15,7 @@ namespace BotPlatform.Controllers
         [HttpGet]
         public string Get()
         {
-            AcceptedAttributes attributes = new AcceptedAttributes();
+            AcceptedAttributes attributes = new AcceptedAttributes(Request);
             //string gender = Request.Query.FirstOrDefault(p => p.Key == "gender").Value;
             //string usrName = Request.Query.FirstOrDefault(p => p.Key == "first name").Value;
             //string blckAtr = Request.Query.FirstOrDefault(p => p.Key == "block-atr").Value;
@@ -29,9 +29,9 @@ namespace BotPlatform.Controllers
 
             ChatAnswer chatAnswer = new ChatAnswer();
 
-            if(attributes.BlockAttribute == "simple_set") answer = chatAnswer.GetGenderAnswer(attributes.Gender);
+            if(attributes.BlockAttribute == "simple set") answer = chatAnswer.GetGenderAnswer(attributes.Gender);
 
-            if (attributes.BlockAttribute == "yes_no") answer = chatAnswer.GetGenderNameAnswer(attributes.Gender, attributes.FirstName);
+            if (attributes.BlockAttribute == "yes no") answer = chatAnswer.GetGenderNameAnswer(attributes.Gender, attributes.FirstName);
 
             return answer;
         }
