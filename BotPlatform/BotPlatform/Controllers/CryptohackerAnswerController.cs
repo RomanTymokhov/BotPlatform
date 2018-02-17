@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BotPlatform.ChatExtentions;
 using BotPlatform.Cryptohacker;
 using BotPlatform.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -14,21 +15,23 @@ namespace BotPlatform.Controllers
         [HttpGet]
         public string Get()
         {
-            string gender = Request.Query.FirstOrDefault(p => p.Key == "gender").Value;
-            string usrName = Request.Query.FirstOrDefault(p => p.Key == "first name").Value;
+            AcceptedAttributes attributes = new AcceptedAttributes();
+            //string gender = Request.Query.FirstOrDefault(p => p.Key == "gender").Value;
+            //string usrName = Request.Query.FirstOrDefault(p => p.Key == "first name").Value;
+            //string blckAtr = Request.Query.FirstOrDefault(p => p.Key == "block-atr").Value;
 
-            return GetAnswer(gender, usrName);
+            return GetAnswer(attributes);
         }
 
-        private string GetAnswer(string gender, string usrName)
+        private string GetAnswer(AcceptedAttributes attributes)
         {
             string answer = null;
 
             ChatAnswer chatAnswer = new ChatAnswer();
 
-            if(gender != null && usrName == null) answer = chatAnswer.GetGenderAnswer(gender);
+            if(attributes.BlockAttribute == "simple set") answer = chatAnswer.GetGenderAnswer(attributes.Gender);
 
-            if (gender != null && usrName != null) answer = chatAnswer.GetGenderNameAnswer(gender, usrName);
+            if (attributes.BlockAttribute == "yes no") answer = chatAnswer.GetGenderNameAnswer(attributes.Gender, attributes.FirstName);
 
             return answer;
         }
