@@ -29,9 +29,9 @@ namespace BotPlatform.Controllers
 
             ChatAnswer chatAnswer = new ChatAnswer();
 
-            if(attributes.BlockAttribute == "simple set") answer = chatAnswer.GetGenderAnswer(attributes.Gender);
+            if(attributes.BlockAttribute == "simple_set") answer = chatAnswer.GetGenderAnswer(attributes.Gender);
 
-            if (attributes.BlockAttribute == "yes no") answer = chatAnswer.GetGenderNameAnswer(attributes.Gender, attributes.FirstName);
+            if (attributes.BlockAttribute == "yes_no") answer = chatAnswer.GetGenderNameAnswer(attributes.Gender, attributes.FirstName);
 
             return answer;
         }
