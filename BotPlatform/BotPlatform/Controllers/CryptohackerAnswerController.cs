@@ -16,9 +16,6 @@ namespace BotPlatform.Controllers
         public string Get()
         {
             AcceptedAttributes attributes = new AcceptedAttributes(Request);
-            //string gender = Request.Query.FirstOrDefault(p => p.Key == "gender").Value;
-            //string usrName = Request.Query.FirstOrDefault(p => p.Key == "first name").Value;
-            //string blckAtr = Request.Query.FirstOrDefault(p => p.Key == "block-atr").Value;
 
             return GetAnswer(attributes);
         }
