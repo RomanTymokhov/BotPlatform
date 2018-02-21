@@ -25,13 +25,13 @@ p {
 }
 
 ul li{
-    line-height:21%;
+    line-height:121%;
 }
 
 figure{
     text-align:center;
 }
 
-figure img{
+img{
     max-width:100%;
 }
