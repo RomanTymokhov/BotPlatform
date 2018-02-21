@@ -1,4 +1,8 @@
-﻿body h2, h3{
+﻿body {
+    font-family: Montserrat, sans-serif;
+}
+
+body h2, h3{
     text-align:center;
 }
 
@@ -15,6 +19,7 @@ body video {
 }
 
 p {
-    text-align:justify;
-    padding:2px;
+    text-align: justify;
+    padding-left: 5px;
+    padding-right: 5px;
 }
