@@ -27,3 +27,7 @@ p {
 ul li{
     line-height:21%;
 }
+
+figure figcaption {
+    text-align:center;
+}
