@@ -1,4 +1,8 @@
-﻿body video {
+﻿body{
+    text-align:center;
+}
+
+body video {
     max-width:100%;
     margin:0;
     padding:0;

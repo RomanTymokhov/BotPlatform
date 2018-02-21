@@ -13,6 +13,8 @@ namespace BotPlatform.ChatExtentions
         public string ChatfuelUserId { get; set; }
         public string BlockAttribute { get; set; }
         public string ProfilePicUrl { get; set; }
+        public string UserEmail { get; set; }
+        public string UserPhone { get; set; }
         public string FirstName { get; set; }
         public string Timezone { get; set; }
         public string Lastame { get; set; }
@@ -31,6 +33,8 @@ namespace BotPlatform.ChatExtentions
             ChatfuelUserId = Request.Query.FirstOrDefault(p => p.Key == "chatfuel user id").Value;
             BlockAttribute = Request.Query.FirstOrDefault(p => p.Key == "block attribute").Value;
             ProfilePicUrl = Request.Query.FirstOrDefault(p => p.Key == "profile pic url").Value;
+            UserEmail = Request.Query.FirstOrDefault(p => p.Key == "usr-email").Value;
+            UserPhone = Request.Query.FirstOrDefault(p => p.Key == "usr-phone").Value;
             FirstName = Request.Query.FirstOrDefault(p => p.Key == "first name").Value;
             Timezone = Request.Query.FirstOrDefault(p => p.Key == "timezone").Value;
             Lastame = Request.Query.FirstOrDefault(p => p.Key == "lastname").Value;
