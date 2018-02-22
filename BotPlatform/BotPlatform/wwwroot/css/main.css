@@ -40,5 +40,7 @@ img{
 .attantion {
     padding: 10px;
     margin: 12px;
-    background-color: #E1E1E1;
+    background-color: #F3F3F3;
+    border-radius: 2px;
+    text-shadow: 1px 1px 2px black, 0 0 1em #DBDBDB;
 }
