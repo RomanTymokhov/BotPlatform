@@ -46,11 +46,11 @@ img{
     color: #DBDBDB;
 }*/
 
-.attation {
+.attantion {
     background-color: #F3F3F3;
     -webkit-background-clip: content-box;
     -moz-background-clip: content-box;
     background-clip: content-box;
     color: transparent;
-    text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
+    text-shadow: rgba(255,255,255,0.5) 0px 1px 1px;
 }
