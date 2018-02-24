@@ -52,9 +52,9 @@ namespace BotPlatform.Cryptohacker
 
         private void FillFemailAnswers()
         {
-            femaleAnswersToMax.Add("Гей, кралечко, полегше...");
-            femaleAnswersToMax.Add("Воув, дівонька, не так швидко...");
-            femaleAnswersToMax.Add("І що це ти написала?");
+            femaleAnswersToMax.Add("🤖 Гей, кралечко, полегше...");
+            femaleAnswersToMax.Add("🤖 Воув, дівонька, не так швидко...");
+            femaleAnswersToMax.Add("🤖 І що це ти написала?");
         }
 
         private int Rnd(List<string> answList)
@@ -70,9 +70,9 @@ namespace BotPlatform.Cryptohacker
         public string GetGenderNameAnswer(string gender, string usrName)
         {
             if (gender == "male")
-                return JsonConvert.SerializeObject(PackageResponse(usrName + " ти мене кликав?"));
+                return JsonConvert.SerializeObject(PackageResponse("🤖" + usrName + ", ти мене кликав?"));
             else
-                return JsonConvert.SerializeObject(PackageResponse(usrName + " ти мене кликала?"));
+                return JsonConvert.SerializeObject(PackageResponse("🤖" + usrName + ", ти мене кликала?"));
         }
 
         #endregion
