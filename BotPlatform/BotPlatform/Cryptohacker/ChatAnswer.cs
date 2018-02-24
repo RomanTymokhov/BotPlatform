@@ -64,15 +64,16 @@ namespace BotPlatform.Cryptohacker
             return rnd.Next(answList.Count);
         }
         #endregion
+
         #region Gender + Name
         //Логика ответа с учетом гендерной принадлежности и имени
 
         public string GetGenderNameAnswer(string gender, string usrName)
         {
             if (gender == "male")
-                return JsonConvert.SerializeObject(PackageResponse("🤖" + usrName + ", ти мене кликав?"));
+                return JsonConvert.SerializeObject(PackageResponse("🤖 " + usrName + ", ти мене кликав?"));
             else
-                return JsonConvert.SerializeObject(PackageResponse("🤖" + usrName + ", ти мене кликала?"));
+                return JsonConvert.SerializeObject(PackageResponse("🤖 " + usrName + ", ти мене кликала?"));
         }
 
         #endregion
