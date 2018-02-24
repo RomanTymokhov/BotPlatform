@@ -22,6 +22,7 @@
     <Folder Include="wwwroot\img\lesson_5\" />
     <Folder Include="wwwroot\img\lesson_6\" />
     <Folder Include="wwwroot\img\lesson_7\" />
+    <Folder Include="wwwroot\img\lesson_8\" />
   </ItemGroup>
 
 </Project>
