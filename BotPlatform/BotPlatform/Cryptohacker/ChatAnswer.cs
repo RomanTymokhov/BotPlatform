@@ -45,9 +45,9 @@ namespace BotPlatform.Cryptohacker
 
         private void FillMailAnswers()
         {
-            maleAnswersToMax.Add("Гей, ковбоє, полегше...");
-            maleAnswersToMax.Add("Воув, хлопче, не так швидко...");
-            maleAnswersToMax.Add("І що це ти написав?");
+            maleAnswersToMax.Add("🤖 Гей, ковбоє, полегше...");
+            maleAnswersToMax.Add("🤖 Воув, хлопче, не так швидко...");
+            maleAnswersToMax.Add("🤖 І що це ти написав?");
         }
 
         private void FillFemailAnswers()

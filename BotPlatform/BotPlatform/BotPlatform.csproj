@@ -7,7 +7,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +24,10 @@
     <Folder Include="wwwroot\img\lesson_6\" />
     <Folder Include="wwwroot\img\lesson_7\" />
     <Folder Include="wwwroot\img\lesson_8\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\roman\One Drive\OneDrive\Документы\bizmaster.xyz\CunaWrapper\CunaWrapper.csproj" />
   </ItemGroup>
 
 </Project>
