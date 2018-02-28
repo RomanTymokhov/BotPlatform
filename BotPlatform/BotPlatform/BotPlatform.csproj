@@ -7,7 +7,12 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.4.1" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.4.1" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.4.1" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.4.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +28,10 @@
     <Folder Include="wwwroot\img\lesson_6\" />
     <Folder Include="wwwroot\img\lesson_7\" />
     <Folder Include="wwwroot\img\lesson_8\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>
