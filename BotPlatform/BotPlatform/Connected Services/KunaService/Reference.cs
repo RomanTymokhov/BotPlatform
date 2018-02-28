@@ -36,7 +36,7 @@ namespace KunaService
     /// <param name="serviceEndpoint">Настраиваемая конечная точка</param>
     /// <param name="clientCredentials">Учетные данные клиента.</param>
     static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
-        
+       
         public KunaServiseClient(EndpointConfiguration endpointConfiguration) : 
                 base(KunaServiseClient.GetBindingForEndpoint(endpointConfiguration), KunaServiseClient.GetEndpointAddress(endpointConfiguration))
         {

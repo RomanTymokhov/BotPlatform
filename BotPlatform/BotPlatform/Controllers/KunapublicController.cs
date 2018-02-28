@@ -12,14 +12,13 @@ namespace BotPlatform.Controllers
     [Route("api/Kunapublic")]
     public class KunapublicController : Controller
     {
-        KunaServiseClient kunaServise = new KunaServiseClient();
+        KunaServiseClient kunaServise = new KunaServiseClient(KunaServiseClient.EndpointConfiguration.BasicHttpBinding_IKunaServise, "http://kunaservice.azurewebsites.net/KunaServise.svc");
 
         // GET: api/Kunapublic/5
         [HttpGet]
         public string Get()
-        {
-
-            return "value";
+        {            
+            return kunaServise.GetTimestampAsync().Result.ToString();
         }
         
         // POST: api/Kunapublic
