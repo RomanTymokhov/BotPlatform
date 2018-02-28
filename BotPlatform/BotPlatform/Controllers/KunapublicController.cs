@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using KunaService;
+using BotPlatform.ServerLogic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,13 +12,13 @@ namespace BotPlatform.Controllers
     [Route("api/Kunapublic")]
     public class KunapublicController : Controller
     {
-        KunaServiseClient kunaServise = new KunaServiseClient(KunaServiseClient.EndpointConfiguration.BasicHttpBinding_IKunaServise, "http://kunaservice.azurewebsites.net/KunaServise.svc");
+         KunaHandler kunaHandler = new KunaHandler();
 
         // GET: api/Kunapublic/5
         [HttpGet]
         public string Get()
-        {            
-            return kunaServise.GetTimestampAsync().Result.ToString();
+        {
+            return kunaHandler.GetTimestamp();
         }
         
         // POST: api/Kunapublic
