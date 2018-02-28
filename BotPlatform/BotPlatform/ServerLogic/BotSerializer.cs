@@ -17,5 +17,10 @@ namespace BotPlatform.ServerLogic
 
             return JsonConvert.SerializeObject(txtResp);
         }
+
+        public static T Deserialize<T>(string json)
+        {
+            return JsonConvert.DeserializeObject<T>(json);            
+        }
     }
 }

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BotPlatform.Controllers
 {
-    [Produces("application/json")]
     [Route("api/Kunapublic")]
     public class KunapublicController : Controller
     {

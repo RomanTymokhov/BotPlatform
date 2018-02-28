@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BotPlatform.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/CryptohackerAnswer")]
     public class CryptohackerAnswerController : Controller
     {
         [HttpGet]

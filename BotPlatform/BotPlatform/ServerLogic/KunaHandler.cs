@@ -18,7 +18,8 @@ namespace BotPlatform.ServerLogic
 
         public string GetTimestamp()
         {
-            return BotSerializer.SendText(KunaServise.GetTimestampAsync().Result);
+            var timestamp = BotSerializer.Deserialize<string>(KunaServise.GetTimestampAsync().Result);            
+            return BotSerializer.SendText(timestamp);
         }
     }
 }
