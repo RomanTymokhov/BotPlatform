@@ -3,6 +3,7 @@ using KunaService;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BotPlatform.Data.KunaData;
 
 namespace BotPlatform.ServerLogic
 {
@@ -18,8 +19,14 @@ namespace BotPlatform.ServerLogic
 
         public string GetTimestamp()
         {
-            var timestamp = BotSerializer.Deserialize<string>(KunaServise.GetTimestampAsync().Result);            
-            return BotSerializer.SendText(timestamp);
+            return KunaServise.GetTimestampAsync().Result;
+        }
+
+        public string GetCurrensy(string marketPair)
+        {
+            var tickerLine = KunaServise.GetTickerlineAsync(marketPair).Result;
+
+            return tickerLine.ticker.buy.ToString();
         }
     }
 }

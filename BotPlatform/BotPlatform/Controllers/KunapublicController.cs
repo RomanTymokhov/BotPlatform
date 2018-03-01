@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BotPlatform.ChatExtentions;
+using BotPlatform.Cryptohacker;
 using BotPlatform.ServerLogic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,13 +19,26 @@ namespace BotPlatform.Controllers
         [HttpGet]
         public string Get()
         {
-            return kunaHandler.GetTimestamp();
+            KunaAttributes attributes = new KunaAttributes(Request);
+
+            return GetAnswer(attributes);
         }
         
         // POST: api/Kunapublic
         [HttpPost]
         public void Post([FromBody]string value)
         {
+        }
+
+        private string GetAnswer(KunaAttributes attributes)
+        {
+            string answer = null;
+            ChatAnswer chatAnswer = new ChatAnswer();
+
+            if (attributes.Timestamp == "timestamp") answer = chatAnswer.GetTimestamp(kunaHandler.GetTimestamp());
+            if (attributes.MarketPair != null) answer = chatAnswer.GetCurrensy(attributes.MarketPair, kunaHandler.GetCurrensy(attributes.MarketPair));
+
+            return answer;
         }
     }
 }

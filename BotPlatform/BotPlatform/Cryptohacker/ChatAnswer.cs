@@ -66,5 +66,21 @@ namespace BotPlatform.Cryptohacker
         }
 
         #endregion
+
+        #region Timestamp
+
+        public string GetTimestamp(string timestamp)
+        {
+            return BotSerializer.SendText("Час на сервері: " + timestamp);
+        }
+
+        #endregion
+
+        #region Currensys
+        public string GetCurrensy(string marketPair, string currValue)
+        {
+            return BotSerializer.SendText("📈 " + marketPair + ": " + currValue + " hrn");
+        }
+        #endregion
     }
 }
