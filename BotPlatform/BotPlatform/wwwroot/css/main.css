@@ -6,6 +6,10 @@ body h2, h3{
     text-align:center;
 }
 
+h1,h2,h3,h4,ol,ul,div{
+    color: #303030;
+}
+
 body video {
     max-width:100%;
     margin:0;
