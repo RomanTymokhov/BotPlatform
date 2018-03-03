@@ -1,0 +1,25 @@
+﻿@model Dictionary<string, string>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="~/css/currency.css"/>
+    <meta charset="utf-8">
+    <title>Currency</title>
+</head>
+<body>
+    <div class="main-zone">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="curr-zone">
+                    <div>@item.Key.ToUpper()</div> 
+                    <div>@item.Value</div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

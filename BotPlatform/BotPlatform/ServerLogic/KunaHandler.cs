@@ -13,7 +13,7 @@ namespace BotPlatform.ServerLogic
 
         public KunaHandler()
         {
-            KunaServise = new KunaServiseClient(KunaServiseClient.EndpointConfiguration.BasicHttpBinding_IKunaServise, 
+            KunaServise = new KunaServiseClient(KunaServiseClient.EndpointConfiguration.BasicHttpBinding_IKunaServise,
                                                 "http://kunaservice.azurewebsites.net/KunaServise.svc");
         }
 
@@ -22,11 +22,24 @@ namespace BotPlatform.ServerLogic
             return KunaServise.GetTimestampAsync().Result;
         }
 
-        public string GetCurrensy(string marketPair)
+        public string GetCurrensyToBot(string marketPair)
         {
             var tickerLine = KunaServise.GetTickerlineAsync(marketPair).Result;
 
             return tickerLine.ticker.buy.ToString();
+        }
+
+        public Dictionary<string, string> GetCurrencyToSite()
+        {
+            Dictionary<string, string> currency = new Dictionary<string, string>();
+
+            currency.Add("btc/uah", KunaServise.GetTickerlineAsync("btcuah").Result.ticker.buy.ToString());
+            currency.Add("eth/uah", KunaServise.GetTickerlineAsync("ethuah").Result.ticker.buy.ToString());
+            currency.Add("bch/uah", KunaServise.GetTickerlineAsync("bchuah").Result.ticker.buy.ToString());
+            currency.Add("waves/uah", KunaServise.GetTickerlineAsync("wavesuah").Result.ticker.buy.ToString());
+            currency.Add("xrp/uah", KunaServise.GetTickerlineAsync("xrpuah").Result.ticker.buy.ToString());
+
+            return currency;
         }
     }
 }

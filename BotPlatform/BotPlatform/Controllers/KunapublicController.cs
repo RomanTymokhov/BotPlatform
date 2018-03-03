@@ -23,7 +23,7 @@ namespace BotPlatform.Controllers
 
             return GetAnswer(attributes);
         }
-        
+
         // POST: api/Kunapublic
         [HttpPost]
         public void Post([FromBody]string value)
@@ -36,7 +36,7 @@ namespace BotPlatform.Controllers
             ChatAnswer chatAnswer = new ChatAnswer();
 
             if (attributes.Timestamp == "timestamp") answer = chatAnswer.GetTimestamp(kunaHandler.GetTimestamp());
-            if (attributes.MarketPair != null) answer = chatAnswer.GetCurrensy(attributes.MarketPair, kunaHandler.GetCurrensy(attributes.MarketPair));
+            if (attributes.MarketPair != null) answer = chatAnswer.GetCurrensy(attributes.MarketPair, kunaHandler.GetCurrensyToBot(attributes.MarketPair));
 
             return answer;
         }

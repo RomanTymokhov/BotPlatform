@@ -1,0 +1,29 @@
+﻿body {
+    font-family: Montserrat, sans-serif;
+}
+
+* {
+    max-width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.main-zoe{
+    padding:10px;
+}
+
+.curr-zone {
+    display: inline-block;
+    padding: 2px;
+    margin-top:2px;
+    border: solid 1px #CC0000;
+    border-radius: 2px;
+    color: #CC0000;
+}
+
+.curr-zone div{
+    margin:1px;
+    text-align:center;
+    font-size: 14px;
+}
