@@ -36,13 +36,11 @@ namespace BotPlatform
             }
 
             app.UseStaticFiles();
-            //app.UseMvc();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action}");
-            });
+            app.UseMvc();
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute("kuna", "kuna/course", new { controller = "Kuna", action = "Course" });
+            //});
         }
     }
 }
