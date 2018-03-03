@@ -682,11 +682,11 @@ namespace KunaService
         {
             if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IKunaServise))
             {
-                return new System.ServiceModel.EndpointAddress("http://kunaservice/KunaServise.svc");
+                return new System.ServiceModel.EndpointAddress("http://kunaservice.azurewebsites.net/KunaServise.svc");
             }
             if ((endpointConfiguration == EndpointConfiguration.BasicHttpsBinding_IKunaServise))
             {
-                return new System.ServiceModel.EndpointAddress("https://kunaservice.azurewebsites.net/KunaServise.svc");
+                return new System.ServiceModel.EndpointAddress("https://kunaservice/KunaServise.svc");
             }
             throw new System.InvalidOperationException(string.Format("Не удалось найти конечную точку с именем \"{0}\".", endpointConfiguration));
         }
