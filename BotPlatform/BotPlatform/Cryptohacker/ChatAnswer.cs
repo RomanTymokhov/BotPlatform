@@ -79,7 +79,7 @@ namespace BotPlatform.Cryptohacker
         #region Currensys
         public string GetCurrensy(string marketPair, string currValue)
         {
-            return BotSerializer.SendText("📈 " + marketPair + ": " + currValue + " hrn");
+            return BotSerializer.SendText("📈 " + marketPair.ToUpper() + ": " + currValue + " UAH");
         }
         #endregion
     }
