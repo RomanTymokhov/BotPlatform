@@ -18,6 +18,15 @@ namespace BotPlatform.ServerLogic
             return JsonConvert.SerializeObject(txtResp);
         }
 
+        public static string SendMedia(string mediaType, string mediaUrl)
+        {
+            MediaResponse response = new MediaResponse();
+            Attachment attachment = new Attachment(mediaType, mediaUrl);
+            response.CreateResponse(attachment);
+
+            return JsonConvert.SerializeObject(response);
+        }
+
         public static T Deserialize<T>(string json)
         {
             return JsonConvert.DeserializeObject<T>(json);            

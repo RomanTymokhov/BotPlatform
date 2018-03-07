@@ -27,6 +27,10 @@
     <Folder Include="wwwroot\img\lesson_6\" />
     <Folder Include="wwwroot\img\lesson_7\" />
     <Folder Include="wwwroot\img\lesson_8\" />
+    <Folder Include="wwwroot\img\lesson_0\" />
+    <Folder Include="wwwroot\lessons\ta-indicators\trends\" />
+    <Folder Include="wwwroot\lessons\ta-indicators\oscylyators\" />
+    <Folder Include="wwwroot\lessons\ta-indicators\volotyles\" />
   </ItemGroup>
 
   <ItemGroup>
