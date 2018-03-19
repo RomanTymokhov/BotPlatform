@@ -32,8 +32,9 @@ ul li{
     margin-top:2%;
 }
 
-figure{
+figure, figcaption{
     text-align:center;
+    font-size:75%;
 }
 
 img{
