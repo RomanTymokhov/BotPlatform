@@ -78,11 +78,11 @@ namespace BotPlatform.Cryptohacker
         #endregion
 
         #region Default Answer
-        public string GetDefaultAnswer(string refParam)
+        public string GetDefaultAnswer(string blockId)
         {
-            switch(refParam)
+            switch(blockId)
             {
-                case "MainMenuBlock": return BotSerializer.SendText("🤖 просто введи \"ТАК\" або \"НІ\" "); 
+                case "5a85b3f0e4b0caec2dd1d80a": return BotSerializer.SendText("🤖 просто введи \"ТАК\" або \"НІ\" "); 
                 default: return BotSerializer.SendText(defaultAnswers.ElementAt(Rnd(defaultAnswers)));
             }
         }

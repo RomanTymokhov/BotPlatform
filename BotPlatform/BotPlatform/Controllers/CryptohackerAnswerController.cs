@@ -30,7 +30,7 @@ namespace BotPlatform.Controllers
 
             if (attributes.BlockAttribute == "yes no") answer = chatAnswer.GetGenderNameAnswer(attributes.Gender, attributes.FirstName);
 
-            if (attributes.Ref == "MainMenuBlock") answer = chatAnswer.GetDefaultAnswer(attributes.Ref);
+            if (attributes.LastVisitedBlockId == "5a85b3f0e4b0caec2dd1d80a") answer = chatAnswer.GetDefaultAnswer(attributes.LastVisitedBlockId);
 
             return answer;
         }
