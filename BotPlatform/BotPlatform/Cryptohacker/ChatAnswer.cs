@@ -10,27 +10,21 @@ namespace BotPlatform.Cryptohacker
     {
         private List<string> maleAnswersToMax;
         private List<string> femaleAnswersToMax;
+        private List<string> defaultAnswers;
 
         public ChatAnswer()
         {
             maleAnswersToMax = new List<string>();
             femaleAnswersToMax = new List<string>();
+            defaultAnswers = new List<string>();
             FillAnswers();
-        }
-
-        #region Max --> Gender
-        //Логика ответа на имя бота с учетом гендерной принадлежности юзера
-        public string GetGenderAnswer(string gender)
-        {
-            if (gender == "male")
-                 return BotSerializer.SendText(maleAnswersToMax.ElementAt(Rnd(maleAnswersToMax)));
-            else return BotSerializer.SendText(femaleAnswersToMax.ElementAt(Rnd(femaleAnswersToMax)));
         }
 
         private void FillAnswers()
         {
             FillMailAnswers();
             FillFemailAnswers();
+            FillDefaultAnswers();
         }
 
         private void FillMailAnswers()
@@ -47,15 +41,31 @@ namespace BotPlatform.Cryptohacker
             femaleAnswersToMax.Add("🤖 І що це ти написала?");
         }
 
+        private void FillDefaultAnswers()
+        {
+            defaultAnswers.Add("🤖 Хочь я й бот, але мій штучний інтелект ще не на стільки розумний щоб тебе зрозуміти...");
+            defaultAnswers.Add("🤖 Твоя писанина спалила мій процессор...");
+            defaultAnswers.Add("🤖 Мій мозок закипів від твоєї писанини...");
+        }
+
         private int Rnd(List<string> answList)
         {
             Random rnd = new Random();
             return rnd.Next(answList.Count);
         }
+
+        #region Max --> Gender
+        //Логика ответа Макса на имя бота с учетом гендерной принадлежности юзера
+        public string GetGenderAnswer(string gender)
+        {
+            if (gender == "male")
+                 return BotSerializer.SendText(maleAnswersToMax.ElementAt(Rnd(maleAnswersToMax)));
+            else return BotSerializer.SendText(femaleAnswersToMax.ElementAt(Rnd(femaleAnswersToMax)));
+        }
         #endregion
 
         #region Gender + Name
-        //Логика ответа с учетом гендерной принадлежности и имени
+        //Логика ответа Макса с учетом гендерной принадлежности и имени
 
         public string GetGenderNameAnswer(string gender, string usrName)
         {
@@ -63,6 +73,18 @@ namespace BotPlatform.Cryptohacker
                 return BotSerializer.SendText("🤖 " + usrName + ", ти мене кликав?");
             else
                 return BotSerializer.SendText("🤖 " + usrName + ", ти мене кликала?");
+        }
+
+        #endregion
+
+        #region Default Answer
+        public string GetDefaultAnswer(string refParam)
+        {
+            switch(refParam)
+            {
+                case "MainMenuBlock": return BotSerializer.SendText("🤖 просто введи \"ТАК\" або \"НІ\" "); 
+                default: return BotSerializer.SendText(defaultAnswers.ElementAt(Rnd(defaultAnswers)));
+            }
         }
 
         #endregion
