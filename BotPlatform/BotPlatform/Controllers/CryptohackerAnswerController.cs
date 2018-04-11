@@ -28,7 +28,7 @@ namespace BotPlatform.Controllers
 
             if(attributes.BlockAttribute == "default-answer") answer = chatAnswer.GetGenderAnswer(attributes.Gender);
 
-            if (attributes.BlockAttribute == "yes no") answer = chatAnswer.GetGenderNameAnswer(attributes.Gender, attributes.FirstName);
+            if (attributes.BlockAttribute == "yes-no") answer = chatAnswer.GetGenderNameAnswer(attributes.Gender, attributes.FirstName);
 
             if (attributes.LastVisitedBlockId != null) answer = chatAnswer.GetDefaultAnswer(attributes.LastVisitedBlockId);
 
