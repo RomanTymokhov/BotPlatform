@@ -31,7 +31,7 @@ namespace BotPlatform.ChatExtentions
             LastVisitedBlockId = Request.Query.FirstOrDefault(p => p.Key == "last visited block id").Value;
             MessengerUserId = Request.Query.FirstOrDefault(p => p.Key == "messenger user id").Value;
             ChatfuelUserId = Request.Query.FirstOrDefault(p => p.Key == "chatfuel user id").Value;
-            BlockAttribute = Request.Query.FirstOrDefault(p => p.Key == "block attribute").Value;
+            BlockAttribute = Request.Query.FirstOrDefault(p => p.Key == "block-atr").Value;
             ProfilePicUrl = Request.Query.FirstOrDefault(p => p.Key == "profile pic url").Value;
             UserEmail = Request.Query.FirstOrDefault(p => p.Key == "usr-email").Value;
             UserPhone = Request.Query.FirstOrDefault(p => p.Key == "usr-phone").Value;
