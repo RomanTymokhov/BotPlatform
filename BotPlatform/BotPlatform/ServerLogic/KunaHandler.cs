@@ -36,8 +36,8 @@ namespace BotPlatform.ServerLogic
             currency.Add("btc/uah", KunaServise.GetTickerlineAsync("btcuah").Result.ticker.buy.ToString());
             currency.Add("eth/uah", KunaServise.GetTickerlineAsync("ethuah").Result.ticker.buy.ToString());
             currency.Add("bch/uah", KunaServise.GetTickerlineAsync("bchuah").Result.ticker.buy.ToString());
-            currency.Add("waves/uah", KunaServise.GetTickerlineAsync("wavesuah").Result.ticker.buy.ToString());
             currency.Add("xrp/uah", KunaServise.GetTickerlineAsync("xrpuah").Result.ticker.buy.ToString());
+            currency.Add("waves/uah", KunaServise.GetTickerlineAsync("wavesuah").Result.ticker.buy.ToString());
 
             return currency;
         }

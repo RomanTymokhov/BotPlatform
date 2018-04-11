@@ -82,7 +82,7 @@ namespace BotPlatform.Cryptohacker
         {
             switch (blockId)
             {
-                case "5a85b415e4b0caec2dd260c5": return BotSerializer.SendText("🤖 просто введи \"ТАК\" або \"НІ\" ");
+                case "5a85b3f0e4b0caec2dd1d80a": return BotSerializer.SendText("🤖 просто введи \"ТАК\" або \"НІ\" ");
                 case "5a85c0a7e4b0caec2e03281f": return BotSerializer.SendText("🤖 test YES text ");
                 case "5a85c161e4b0caec2e057085": return BotSerializer.SendText("🤖 test NO text ");
                 default: return BotSerializer.SendText(defaultAnswers.ElementAt(Rnd(defaultAnswers)));
