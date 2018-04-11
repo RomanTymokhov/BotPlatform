@@ -83,6 +83,8 @@ namespace BotPlatform.Cryptohacker
             switch (refParam)
             {
                 case "MainYesNoBlock": return BotSerializer.SendText("🤖 просто введи \"ТАК\" або \"НІ\" ");
+                case "MainYes": return BotSerializer.SendText("🤖 test YES text ");
+                case "MainNo": return BotSerializer.SendText("🤖 test NO text ");
                 default: return BotSerializer.SendText(defaultAnswers.ElementAt(Rnd(defaultAnswers)));
             }
         }
