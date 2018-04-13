@@ -9,6 +9,7 @@ namespace BotPlatform.ChatExtentions
         public string LastClickedButtonName { get; set; }
         public string LastVisitedBlockName { get; set; }
         public string LastVisitedBlockId { get; set; }
+        public string LastBlockBeforeAi { get; set; }
         public string MessengerUserId { get; set; }
         public string ChatfuelUserId { get; set; }
         public string BlockAttribute { get; set; }
@@ -29,6 +30,7 @@ namespace BotPlatform.ChatExtentions
             LastClickedButtonName = Request.Query.FirstOrDefault(p => p.Key == "last clicked button name").Value;
             LastVisitedBlockName = Request.Query.FirstOrDefault(p => p.Key == "last visited block name").Value;
             LastVisitedBlockId = Request.Query.FirstOrDefault(p => p.Key == "last visited block id").Value;
+            LastBlockBeforeAi = Request.Query.FirstOrDefault(p => p.Key == "last-block-before-ai").Value;
             MessengerUserId = Request.Query.FirstOrDefault(p => p.Key == "messenger user id").Value;
             ChatfuelUserId = Request.Query.FirstOrDefault(p => p.Key == "chatfuel user id").Value;
             BlockAttribute = Request.Query.FirstOrDefault(p => p.Key == "block-atr").Value;

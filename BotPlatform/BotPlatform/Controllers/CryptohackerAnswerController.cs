@@ -30,7 +30,7 @@ namespace BotPlatform.Controllers
 
             if (attributes.BlockAttribute == "yes-no") answer = chatAnswer.GetGenderNameAnswer(attributes.Gender, attributes.FirstName);
 
-            if (attributes.LastVisitedBlockName != null) answer = chatAnswer.GetDefaultAnswer(attributes.LastVisitedBlockName);
+            if (attributes.LastBlockBeforeAi != null) answer = chatAnswer.GetDefaultAnswer(attributes.LastBlockBeforeAi);
 
             return answer;
         }
