@@ -22,6 +22,7 @@ namespace BotPlatform.ChatExtentions
         public string Gender { get; set; }
         public string Source { get; set; }
         public string Locale { get; set; }
+        public string BotPic { get; set; }
         public string Ref { get; set; }
 
         public AcceptedAttributes(HttpRequest Request)
@@ -43,6 +44,7 @@ namespace BotPlatform.ChatExtentions
             Gender = Request.Query.FirstOrDefault(p => p.Key == "gender").Value;
             Source = Request.Query.FirstOrDefault(p => p.Key == "source").Value;
             Locale = Request.Query.FirstOrDefault(p => p.Key == "locale").Value;
+            BotPic = Request.Query.FirstOrDefault(p => p.Key == "bot-pic").Value;
             Ref = Request.Query.FirstOrDefault(p => p.Key == "ref").Value;
         }
     }
