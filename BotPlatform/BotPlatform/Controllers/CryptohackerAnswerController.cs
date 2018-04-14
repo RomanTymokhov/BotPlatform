@@ -17,7 +17,8 @@ namespace BotPlatform.Controllers
         {
             AcceptedAttributes attributes = new AcceptedAttributes(Request);
 
-            return GetAnswer(attributes);
+            return BotPlatform.ServerLogic.BotSerializer.SendText(attributes.BotPic);
+            //return GetAnswer(attributes);
         }
 
         private string GetAnswer(AcceptedAttributes attributes)
