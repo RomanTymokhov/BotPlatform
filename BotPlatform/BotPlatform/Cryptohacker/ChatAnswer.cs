@@ -172,7 +172,7 @@ namespace BotPlatform.Cryptohacker
                         else
                             return BotSerializer.SendText(GetBotPic(botPic) + usrName + femaleCalledAnswersRu.ElementAt(Rnd(femaleCalledAnswersRu)));
                     }
-                default: return BotSerializer.SendText("????");
+                default: return BotSerializer.SendText(GetBotPic(botPic) + "????");
             }
         }
 
@@ -184,7 +184,11 @@ namespace BotPlatform.Cryptohacker
         {
             switch (blockId)
             {
-                case "main-menu-blck": return BotSerializer.SendText(GetBotPic(botPic) + " Просто введи \"ТАК\" або \"НІ\" ");
+                case "main-menu-blck":
+                    {
+                        if (botPic == "mark") return BotSerializer.SendText(GetBotPic(botPic) + " Просто введи \"ДА\" или \"НЕТ\" ");
+                        else return BotSerializer.SendText(GetBotPic(botPic) + " Просто введи \"ТАК\" або \"НІ\" ");
+                    };
                 case "max-yes-no": return BotSerializer.SendText(GetBotPic(botPic) + " Відповіси \"ТАК\" або \"НІ\" ");
                 case "mark-yes-no": return BotSerializer.SendText(GetBotPic(botPic) + " Ответь \"ДА\" или \"НЕТ\" ");
                 default: return BotSerializer.SendText(defaultAnswers.ElementAt(Rnd(defaultAnswers)));
