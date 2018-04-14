@@ -133,23 +133,22 @@ namespace BotPlatform.Cryptohacker
         //Логика ответа Макса на имя бота с учетом гендерной принадлежности юзера
         public string GetGenderAnswer(string gender, string botPic)
         {
-            return BotSerializer.SendText(gender + " -- " + botPic);
-            //switch(botPic)
-            //{
-            //    case "max":
-            //        {
-            //            if (gender == "male")
-            //                 return BotSerializer.SendText(GetBotPic(botPic) + maleAnswersToBotUa.ElementAt(Rnd(maleAnswersToBotUa)));
-            //            else return BotSerializer.SendText(GetBotPic(botPic) + femaleAnswersToBotUa.ElementAt(Rnd(femaleAnswersToBotUa)));
-            //        }
-            //    case "mark":
-            //        {
-            //            if (gender == "male")
-            //                return BotSerializer.SendText(GetBotPic(botPic) + maleAnswersToBotRu.ElementAt(Rnd(maleAnswersToBotRu)));
-            //            else return BotSerializer.SendText(GetBotPic(botPic) + femaleAnswersToBotRu.ElementAt(Rnd(femaleAnswersToBotRu)));
-            //        }
-            //    default: return BotSerializer.SendText(GetBotPic(botPic) + " ?????? MG");
-            //}
+            switch (botPic)
+            {
+                case "max":
+                    {
+                        if (gender == "male")
+                            return BotSerializer.SendText(GetBotPic(botPic) + maleAnswersToBotUa.ElementAt(Rnd(maleAnswersToBotUa)));
+                        else return BotSerializer.SendText(GetBotPic(botPic) + femaleAnswersToBotUa.ElementAt(Rnd(femaleAnswersToBotUa)));
+                    }
+                case "mark":
+                    {
+                        if (gender == "male")
+                            return BotSerializer.SendText(GetBotPic(botPic) + maleAnswersToBotRu.ElementAt(Rnd(maleAnswersToBotRu)));
+                        else return BotSerializer.SendText(GetBotPic(botPic) + femaleAnswersToBotRu.ElementAt(Rnd(femaleAnswersToBotRu)));
+                    }
+                default: return BotSerializer.SendText(GetBotPic(botPic) + " ???");
+            }
         }
         #endregion
 
@@ -173,7 +172,7 @@ namespace BotPlatform.Cryptohacker
                         else
                             return BotSerializer.SendText(GetBotPic(botPic) + usrName + femaleCalledAnswersRu.ElementAt(Rnd(femaleCalledAnswersRu)));
                     }
-                default: return BotSerializer.SendText("?????????????? GM");
+                default: return BotSerializer.SendText("????");
             }
         }
 
