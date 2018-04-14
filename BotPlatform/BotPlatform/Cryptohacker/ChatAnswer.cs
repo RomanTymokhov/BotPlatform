@@ -117,6 +117,16 @@ namespace BotPlatform.Cryptohacker
             Random rnd = new Random();
             return rnd.Next(answList.Count);
         }
+
+        private string GetBotPic(string botPic)
+        {
+            switch (botPic)
+            {
+                case "max": return "🤖 ";
+                case "mark": return "👨‍🎓 ";
+                default: return "";
+            }
+        }
         #endregion
 
         #region Max --> Gender
@@ -137,7 +147,7 @@ namespace BotPlatform.Cryptohacker
                             return BotSerializer.SendText(GetBotPic(botPic) + maleAnswersToBotRu.ElementAt(Rnd(maleAnswersToBotRu)));
                         else return BotSerializer.SendText(GetBotPic(botPic) + femaleAnswersToBotRu.ElementAt(Rnd(femaleAnswersToBotRu)));
                     }
-                default: return BotSerializer.SendText("??????");
+                default: return BotSerializer.SendText(GetBotPic(botPic) + " ?????? MG");
             }
         }
         #endregion
@@ -162,17 +172,7 @@ namespace BotPlatform.Cryptohacker
                         else
                             return BotSerializer.SendText(GetBotPic(botPic) + usrName + femaleCalledAnswersRu.ElementAt(Rnd(femaleCalledAnswersRu)));
                     }
-                default: return BotSerializer.SendText("??????????????");
-            }
-        }
-
-        private string GetBotPic(string botPic)
-        {
-            switch(botPic)
-            {
-                case "max": return "🤖 ";
-                case "mark": return "👨‍🎓 ";
-                default: return "";
+                default: return BotSerializer.SendText("?????????????? GM");
             }
         }
 
