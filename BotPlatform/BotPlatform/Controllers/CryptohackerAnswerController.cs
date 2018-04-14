@@ -24,13 +24,13 @@ namespace BotPlatform.Controllers
         {
             string answer = null;
 
-            ChatAnswer chatAnswer = new ChatAnswer(); answer = BotPlatform.ServerLogic.BotSerializer.SendText(attributes.BotPic);
+            ChatAnswer chatAnswer = new ChatAnswer();
 
-            //if(attributes.BlockAttribute == "default-answer") answer = chatAnswer.GetGenderAnswer(attributes.Gender, attributes.BotPic);
+            if (attributes.BlockAttribute == "default-answer") answer = chatAnswer.GetGenderAnswer(attributes.Gender, attributes.BotPic);
 
-            //if (attributes.BlockAttribute == "yes-no") answer = chatAnswer.GetGenderNameAnswer(attributes.Gender, attributes.FirstName, attributes.BotPic);
+            if (attributes.BlockAttribute == "yes-no") answer = chatAnswer.GetGenderNameAnswer(attributes.Gender, attributes.FirstName, attributes.BotPic);
 
-            //if (attributes.LastBlockBeforeAi != null) answer = chatAnswer.GetDefaultAnswer(attributes.LastBlockBeforeAi, attributes.BotPic);
+            if (attributes.LastBlockBeforeAi != null) answer = chatAnswer.GetDefaultAnswer(attributes.LastBlockBeforeAi, attributes.BotPic);
 
             return answer;
         }
