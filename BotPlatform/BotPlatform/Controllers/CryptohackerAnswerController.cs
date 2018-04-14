@@ -17,21 +17,20 @@ namespace BotPlatform.Controllers
         {
             AcceptedAttributes attributes = new AcceptedAttributes(Request);
 
-            return BotPlatform.ServerLogic.BotSerializer.SendText(attributes.BotPic);
-            //return GetAnswer(attributes);
+            return GetAnswer(attributes);
         }
 
         private string GetAnswer(AcceptedAttributes attributes)
         {
             string answer = null;
 
-            ChatAnswer chatAnswer = new ChatAnswer();
+            ChatAnswer chatAnswer = new ChatAnswer(); answer = BotPlatform.ServerLogic.BotSerializer.SendText(attributes.BotPic);
 
-            if(attributes.BlockAttribute == "default-answer") answer = chatAnswer.GetGenderAnswer(attributes.Gender, attributes.BotPic);
+            //if(attributes.BlockAttribute == "default-answer") answer = chatAnswer.GetGenderAnswer(attributes.Gender, attributes.BotPic);
 
-            if (attributes.BlockAttribute == "yes-no") answer = chatAnswer.GetGenderNameAnswer(attributes.Gender, attributes.FirstName, attributes.BotPic);
+            //if (attributes.BlockAttribute == "yes-no") answer = chatAnswer.GetGenderNameAnswer(attributes.Gender, attributes.FirstName, attributes.BotPic);
 
-            if (attributes.LastBlockBeforeAi != null) answer = chatAnswer.GetDefaultAnswer(attributes.LastBlockBeforeAi, attributes.BotPic);
+            //if (attributes.LastBlockBeforeAi != null) answer = chatAnswer.GetDefaultAnswer(attributes.LastBlockBeforeAi, attributes.BotPic);
 
             return answer;
         }
