@@ -8,39 +8,8 @@ namespace BotPlatform.Cryptohacker
 {
     public class ChatAnswer
     {
-        private List<string> defaultAnswersUa;
-        private List<string> defaultAnswersRu;
-
         public ChatAnswer()
         {
-            defaultAnswersUa = new List<string>();
-            defaultAnswersRu = new List<string>();
-
-            FillAnswers();
-        }
-
-        #region Block Fill Answers
-        //Варианты сценариев ответа
-        private void FillAnswers()
-        {
-            FillDefaultAnswers();
-        }
-
-        private void FillDefaultAnswers()
-        {
-            defaultAnswersUa.Add(" Мій штучний інтелект ще не на стільки розумний щоб тебе зрозуміти...");
-            defaultAnswersUa.Add(" Твоя писанина спалила мій процессор...");
-            defaultAnswersUa.Add(" Мій мозок закипів від твоєї писанини...");
-
-            defaultAnswersRu.Add(" Мой искуственный интеллект тебя не понял...");
-            defaultAnswersRu.Add(" Не могу тебя понять...");
-            defaultAnswersRu.Add(" Не могу понять, что это написано...");
-        }
-
-        private int Rnd(List<string> answList)
-        {
-            Random rnd = new Random();
-            return rnd.Next(answList.Count);
         }
 
         private string GetBotPic(string botPic)
@@ -52,12 +21,11 @@ namespace BotPlatform.Cryptohacker
                 default: return "";
             }
         }
-        #endregion
 
         //Логика ответа ПиктоБотов на непонятный ввод
         public string GetAfterWrongTxtinputAnswer(string gender, string botPic)
         {
-            IBotReplicas botReplicas = new AfterWrongTxtinputReplica();
+            IBotReplicas botReplicas = new ReplicaAfterWrongTxtinput();
 
             switch (botPic)
             {
@@ -70,7 +38,7 @@ namespace BotPlatform.Cryptohacker
         //Логика ответа ПиктоБотов на обращение к ним
         public string GetAfterBotsAppealAnswer(string gender, string usrName, string botPic)
         {
-            IBotReplicas botReplicas = new AfterBotsAppealReplica();
+            IBotReplicas botReplicas = new ReplicaAfterBotsAppeal();
 
             switch(botPic)
             {
@@ -79,29 +47,20 @@ namespace BotPlatform.Cryptohacker
                 default: return BotSerializer.SendText(GetBotPic(botPic) + "????");
             }
         }
-
-        #region Default Answer
-        //Логтка ответа если на вопрос макса вбита какая-то лобуда...
-        public string GetDefaultAnswer(string blockId, string botPic)
+        
+        //Логика ответа если на вопрос макса вбита какая-то лобуда...
+        public string GetDefaultAnswer(string botPic, bool defaultAnswer)
         {
-            switch (blockId)
+            IBotReplicas botReplicasYesNo = new ReplicaYesNoAnswer();
+            IBotReplicas botReplicasDefault = new ReplicaDefaultAnswer();
+
+            switch(StaticMethods.Picconstruct(botPic,defaultAnswer))
             {
-                case "main-menu-blck":
-                    {
-                        if (botPic == "mark") return BotSerializer.SendText(GetBotPic(botPic) + " Просто введи \"ДА\" или \"НЕТ\" ");
-                        else return BotSerializer.SendText(GetBotPic(botPic) + " Просто введи \"ТАК\" або \"НІ\" ");
-                    };
-                case "max-yes-no": return BotSerializer.SendText(GetBotPic(botPic) + " Відповіси \"ТАК\" або \"НІ\" ");
-                case "mark-yes-no": return BotSerializer.SendText(GetBotPic(botPic) + " Ответь \"ДА\" или \"НЕТ\" ");
-                default:
-                    {
-                        if (botPic== "mark") return BotSerializer.SendText(GetBotPic(botPic) + defaultAnswersRu.ElementAt(Rnd(defaultAnswersUa)));
-                        else return BotSerializer.SendText(GetBotPic(botPic) + defaultAnswersUa.ElementAt(Rnd(defaultAnswersUa)));
-                    }
+                case "max-false": return BotSerializer.SendText(GetBotPic(botPic) + botReplicasYesNo.GetReplicaUa(botPic));
+                case "mark-false": return BotSerializer.SendText(GetBotPic(botPic) + botReplicasYesNo.GetReplicaRu(botPic));
+                default: return BotSerializer.SendText(GetBotPic(botPic) + botReplicasDefault.GetReplicaRu(botPic));
             }
         }
-
-        #endregion
 
         #region Timestamp
 

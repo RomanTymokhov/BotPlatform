@@ -1,18 +1,19 @@
-﻿using System;
+﻿using BotPlatform.ServerLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace BotPlatform.Cryptohacker
 {
-    public class AfterBotsAppealReplica : IBotReplicas
+    public class ReplicaAfterBotsAppeal : IBotReplicas
     {
         private List<string> maleCalledAnswersUa;
         private List<string> maleCalledAnswersRu;
         private List<string> femaleCalledAnswersUa;
         private List<string> femaleCalledAnswersRu;
 
-        public AfterBotsAppealReplica()
+        public ReplicaAfterBotsAppeal()
         {
             maleCalledAnswersUa = new List<string>();
             maleCalledAnswersRu = new List<string>();
@@ -25,14 +26,14 @@ namespace BotPlatform.Cryptohacker
 
         public string GetReplicaRu(string gender)
         {
-            if (gender == "male") return maleCalledAnswersRu.ElementAt(Rnd(maleCalledAnswersRu));
-            else return femaleCalledAnswersRu.ElementAt(Rnd(femaleCalledAnswersRu));
+            if (gender == "male") return maleCalledAnswersRu.ElementAt(StaticMethods.Rnd(maleCalledAnswersRu));
+            else return femaleCalledAnswersRu.ElementAt(StaticMethods.Rnd(femaleCalledAnswersRu));
         }
 
         public string GetReplicaUa(string gender)
         {
-            if (gender == "male") return maleCalledAnswersUa.ElementAt(Rnd(maleCalledAnswersUa));
-            else return femaleCalledAnswersUa.ElementAt(Rnd(femaleCalledAnswersUa));
+            if (gender == "male") return maleCalledAnswersUa.ElementAt(StaticMethods.Rnd(maleCalledAnswersUa));
+            else return femaleCalledAnswersUa.ElementAt(StaticMethods.Rnd(femaleCalledAnswersUa));
         }
 
         private void FillReplicasRu()
@@ -59,12 +60,6 @@ namespace BotPlatform.Cryptohacker
             femaleCalledAnswersRu.Add(", ти меня звала?");
             femaleCalledAnswersRu.Add(", ты ко мне?");
             femaleCalledAnswersRu.Add(", нужна помощь?");
-        }
-
-        private int Rnd(List<string> answList)
-        {
-            Random rnd = new Random();
-            return rnd.Next(answList.Count);
         }
     }
 }

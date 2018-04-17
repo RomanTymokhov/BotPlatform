@@ -26,13 +26,26 @@ namespace BotPlatform.Controllers
 
             ChatAnswer chatAnswer = new ChatAnswer();
 
+            if (attributes.LastBlockBeforeAi != null) answer = GetAnswerAfterAi(attributes.LastBlockBeforeAi, attributes.BotPic);
+
             if (attributes.BlockAttribute == "default-answer") answer = chatAnswer.GetAfterWrongTxtinputAnswer(attributes.Gender, attributes.BotPic);
 
             if (attributes.BlockAttribute == "yes-no") answer = chatAnswer.GetAfterBotsAppealAnswer(attributes.Gender, attributes.FirstName, attributes.BotPic);
 
-            if (attributes.LastBlockBeforeAi != null) answer = chatAnswer.GetDefaultAnswer(attributes.LastBlockBeforeAi, attributes.BotPic);
-
             return answer;
+        }
+
+        private string GetAnswerAfterAi(string lastBlockHash, string botPic)
+        {
+            ChatAnswer chatAnswer = new ChatAnswer();
+
+            switch(lastBlockHash)
+            {
+                case "main-menu-blck": return chatAnswer.GetDefaultAnswer(botPic, false);
+                case "max-yes-no": return chatAnswer.GetDefaultAnswer(botPic, false);
+                case "mark-yes-no": return chatAnswer.GetDefaultAnswer(botPic, false);
+                default: return chatAnswer.GetDefaultAnswer(botPic, true);
+            }
         }
     }
 }

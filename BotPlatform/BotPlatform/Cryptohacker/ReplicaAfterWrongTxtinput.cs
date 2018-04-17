@@ -1,18 +1,19 @@
-﻿using System;
+﻿using BotPlatform.ServerLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace BotPlatform.Cryptohacker
 {
-    public class AfterWrongTxtinputReplica : IBotReplicas
+    public class ReplicaAfterWrongTxtinput : IBotReplicas
     {
         private List<string> maleReplicaUa;
         private List<string> maleReplicaRu;
         private List<string> femaleReplicaUa;
         private List<string> femaleReplicaRu;
 
-        public AfterWrongTxtinputReplica()
+        public ReplicaAfterWrongTxtinput()
         {
             maleReplicaUa = new List<string>();
             maleReplicaRu = new List<string>();
@@ -25,14 +26,14 @@ namespace BotPlatform.Cryptohacker
 
         public string GetReplicaRu(string gender)
         {
-            if (gender == "male") return maleReplicaRu.ElementAt(Rnd(maleReplicaRu));
-            else return femaleReplicaRu.ElementAt(Rnd(femaleReplicaRu));
+            if (gender == "male") return maleReplicaRu.ElementAt(StaticMethods.Rnd(maleReplicaRu));
+            else return femaleReplicaRu.ElementAt(StaticMethods.Rnd(femaleReplicaRu));
         }
 
         public string GetReplicaUa(string gender)
         {
-            if (gender == "male") return maleReplicaUa.ElementAt(Rnd(maleReplicaUa));
-            else return femaleReplicaUa.ElementAt(Rnd(femaleReplicaUa));
+            if (gender == "male") return maleReplicaUa.ElementAt(StaticMethods.Rnd(maleReplicaUa));
+            else return femaleReplicaUa.ElementAt(StaticMethods.Rnd(femaleReplicaUa));
         }
 
         private void FillReplicasRu()
@@ -59,12 +60,6 @@ namespace BotPlatform.Cryptohacker
             femaleReplicaUa.Add(" Гей, кралечко, полегше...");
             femaleReplicaUa.Add(" Воув, дівонька, не так швидко...");
             femaleReplicaUa.Add(" І що це ти написала?");
-        }
-
-        private int Rnd(List<string> answList)
-        {
-            Random rnd = new Random();
-            return rnd.Next(answList.Count);
         }
     }
 }
