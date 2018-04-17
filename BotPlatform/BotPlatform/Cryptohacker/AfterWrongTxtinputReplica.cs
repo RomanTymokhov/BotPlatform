@@ -14,6 +14,11 @@ namespace BotPlatform.Cryptohacker
 
         public AfterWrongTxtinputReplica()
         {
+            maleReplicaUa = new List<string>();
+            maleReplicaRu = new List<string>();
+            femaleReplicaUa = new List<string>();
+            femaleReplicaRu = new List<string>();
+
             FillReplicasRu();
             FillReplicasUa();
         }

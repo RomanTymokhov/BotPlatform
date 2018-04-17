@@ -14,6 +14,11 @@ namespace BotPlatform.Cryptohacker
 
         public AfterBotsAppealReplica()
         {
+            maleCalledAnswersUa = new List<string>();
+            maleCalledAnswersRu = new List<string>();
+            femaleCalledAnswersUa = new List<string>();
+            femaleCalledAnswersRu = new List<string>();
+
             FillReplicasRu();
             FillReplicasUa();
         }
