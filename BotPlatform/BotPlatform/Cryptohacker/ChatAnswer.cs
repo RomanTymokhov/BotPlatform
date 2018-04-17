@@ -8,31 +8,11 @@ namespace BotPlatform.Cryptohacker
 {
     public class ChatAnswer
     {
-        private List<string> maleAnswersToBotUa;
-        private List<string> femaleAnswersToBotUa;
-        private List<string> maleAnswersToBotRu;
-        private List<string> femaleAnswersToBotRu;
-
-        private List<string> maleCalledAnswersUa;
-        private List<string> femaleCalledAnswersUa;
-        private List<string> maleCalledAnswersRu;
-        private List<string> femaleCalledAnswersRu;
-
         private List<string> defaultAnswersUa;
         private List<string> defaultAnswersRu;
 
         public ChatAnswer()
         {
-            maleAnswersToBotUa = new List<string>();
-            femaleAnswersToBotUa = new List<string>();
-            maleAnswersToBotRu = new List<string>();
-            femaleAnswersToBotRu = new List<string>();
-
-            maleCalledAnswersUa = new List<string>();
-            femaleCalledAnswersUa = new List<string>();
-            maleCalledAnswersRu = new List<string>();
-            femaleCalledAnswersRu = new List<string>();
-
             defaultAnswersUa = new List<string>();
             defaultAnswersRu = new List<string>();
 
@@ -43,69 +23,8 @@ namespace BotPlatform.Cryptohacker
         //Варианты сценариев ответа
         private void FillAnswers()
         {
-            FillBotAnswersUa();
-            FillBotAnswersRu();
-
-            FillCalledAnswersUa();
-            FillCalledAnswersRu();
-
             FillDefaultAnswers();
         }
-
-
-        private void FillBotAnswersUa()
-        {
-            //Male
-            maleAnswersToBotUa.Add(" Гей, ковбоє, полегше...");
-            maleAnswersToBotUa.Add(" Воув, хлопче, не так швидко...");
-            maleAnswersToBotUa.Add(" І що це ти написав?");
-
-            //Female
-            femaleAnswersToBotUa.Add(" Гей, кралечко, полегше...");
-            femaleAnswersToBotUa.Add(" Воув, дівонька, не так швидко...");
-            femaleAnswersToBotUa.Add(" І що це ти написала?");
-        }
-
-        private void FillBotAnswersRu()
-        {
-            //Male
-            maleAnswersToBotRu.Add(" Эй, дружище, полегче...");
-            maleAnswersToBotRu.Add(" Парниша, не так быстро...");
-            maleAnswersToBotRu.Add(" И что это ты написал?");
-
-            //Female
-            femaleAnswersToBotRu.Add(" Симпатюля, полегче...");
-            femaleAnswersToBotRu.Add(" Слишком много букв...");
-            femaleAnswersToBotRu.Add(" И что это ты написала?");
-        }
-
-
-        private void FillCalledAnswersUa()
-        {
-            //Male
-            maleCalledAnswersUa.Add(", ти мене кликав?");
-            maleCalledAnswersUa.Add(", це ти до мене?");
-            maleCalledAnswersUa.Add(", потрібна допомога?");
-
-            //Female
-            femaleCalledAnswersUa.Add(", ти мене кликала?");
-            femaleCalledAnswersUa.Add(", це ти до мене?");
-            femaleCalledAnswersUa.Add(", потрібна допомога?");
-        }
-
-        private void FillCalledAnswersRu()
-        {
-            //Male
-            maleCalledAnswersRu.Add(", ты меня звал?");
-            maleCalledAnswersRu.Add(", ты ко мне?");
-            maleCalledAnswersRu.Add(", нужна помощь?");
-
-            //Female
-            femaleCalledAnswersRu.Add(", ти меня звала?");
-            femaleCalledAnswersRu.Add(", ты ко мне?");
-            femaleCalledAnswersRu.Add(", нужна помощь?");
-        }
-
 
         private void FillDefaultAnswers()
         {
@@ -117,7 +36,6 @@ namespace BotPlatform.Cryptohacker
             defaultAnswersRu.Add(" Не могу тебя понять...");
             defaultAnswersRu.Add(" Не могу понять, что это написано...");
         }
-
 
         private int Rnd(List<string> answList)
         {
@@ -136,54 +54,31 @@ namespace BotPlatform.Cryptohacker
         }
         #endregion
 
-        #region PictoBots --> Wrog Write
         //Логика ответа ПиктоБотов на непонятный ввод
-        public string GetAfterWrongWriteAnswer(string gender, string botPic)
+        public string GetAfterWrongTxtinputAnswer(string gender, string botPic)
         {
+            IBotReplicas botReplicas = new AfterWrongTxtinputReplica();
+
             switch (botPic)
             {
-                case "max":
-                    {
-                        if (gender == "male")
-                            return BotSerializer.SendText(GetBotPic(botPic) + maleAnswersToBotUa.ElementAt(Rnd(maleAnswersToBotUa)));
-                        else return BotSerializer.SendText(GetBotPic(botPic) + femaleAnswersToBotUa.ElementAt(Rnd(femaleAnswersToBotUa)));
-                    }
-                case "mark":
-                    {
-                        if (gender == "male")
-                            return BotSerializer.SendText(GetBotPic(botPic) + maleAnswersToBotRu.ElementAt(Rnd(maleAnswersToBotRu)));
-                        else return BotSerializer.SendText(GetBotPic(botPic) + femaleAnswersToBotRu.ElementAt(Rnd(femaleAnswersToBotRu)));
-                    }
+                case "max": return BotSerializer.SendText(GetBotPic(botPic) + botReplicas.GetReplicaUa(gender));
+                case "mark": return BotSerializer.SendText(GetBotPic(botPic) + botReplicas.GetReplicaRu(gender));
                 default: return BotSerializer.SendText(GetBotPic(botPic) + " ???");
             }
         }
-        #endregion
 
-        #region PictoBots --> Appeal as
-        //Логика ответа Пиктоботов на обращение к ним
+        //Логика ответа ПиктоБотов на обращение к ним
         public string GetAfterBotsAppealAnswer(string gender, string usrName, string botPic)
         {
+            IBotReplicas botReplicas = new AfterBotsAppealReplica();
+
             switch(botPic)
             {
-                case "max":
-                    {
-                        if (gender == "male")
-                            return BotSerializer.SendText(GetBotPic(botPic) + usrName + maleCalledAnswersUa.ElementAt(Rnd(maleCalledAnswersUa)));
-                        else
-                            return BotSerializer.SendText(GetBotPic(botPic) + usrName + femaleCalledAnswersUa.ElementAt(Rnd(femaleCalledAnswersUa)));
-                    }
-                case "mark":
-                    {
-                        if (gender == "male")
-                            return BotSerializer.SendText(GetBotPic(botPic) + usrName + maleCalledAnswersRu.ElementAt(Rnd(maleCalledAnswersRu)));
-                        else
-                            return BotSerializer.SendText(GetBotPic(botPic) + usrName + femaleCalledAnswersRu.ElementAt(Rnd(femaleCalledAnswersRu)));
-                    }
+                case "max": return BotSerializer.SendText(GetBotPic(botPic) + usrName + botReplicas.GetReplicaUa(gender));
+                case "mark": return BotSerializer.SendText(GetBotPic(botPic) + usrName + botReplicas.GetReplicaRu(gender));
                 default: return BotSerializer.SendText(GetBotPic(botPic) + "????");
             }
         }
-
-        #endregion
 
         #region Default Answer
         //Логтка ответа если на вопрос макса вбита какая-то лобуда...

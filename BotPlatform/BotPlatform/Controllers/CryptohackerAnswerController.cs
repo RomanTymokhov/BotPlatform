@@ -26,7 +26,7 @@ namespace BotPlatform.Controllers
 
             ChatAnswer chatAnswer = new ChatAnswer();
 
-            if (attributes.BlockAttribute == "default-answer") answer = chatAnswer.GetAfterWrongWriteAnswer(attributes.Gender, attributes.BotPic);
+            if (attributes.BlockAttribute == "default-answer") answer = chatAnswer.GetAfterWrongTxtinputAnswer(attributes.Gender, attributes.BotPic);
 
             if (attributes.BlockAttribute == "yes-no") answer = chatAnswer.GetAfterBotsAppealAnswer(attributes.Gender, attributes.FirstName, attributes.BotPic);
 
