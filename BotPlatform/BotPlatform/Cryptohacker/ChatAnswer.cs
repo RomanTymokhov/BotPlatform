@@ -18,7 +18,8 @@ namespace BotPlatform.Cryptohacker
         private List<string> maleCalledAnswersRu;
         private List<string> femaleCalledAnswersRu;
 
-        private List<string> defaultAnswers;
+        private List<string> defaultAnswersUa;
+        private List<string> defaultAnswersRu;
 
         public ChatAnswer()
         {
@@ -32,11 +33,13 @@ namespace BotPlatform.Cryptohacker
             maleCalledAnswersRu = new List<string>();
             femaleCalledAnswersRu = new List<string>();
 
-            defaultAnswers = new List<string>();
+            defaultAnswersUa = new List<string>();
+            defaultAnswersRu = new List<string>();
+
             FillAnswers();
         }
 
-        #region Bljck Fill Answers
+        #region Block Fill Answers
         //Варианты сценариев ответа
         private void FillAnswers()
         {
@@ -106,9 +109,13 @@ namespace BotPlatform.Cryptohacker
 
         private void FillDefaultAnswers()
         {
-            defaultAnswers.Add("🤖 Мій штучний інтелект ще не на стільки розумний щоб тебе зрозуміти...");
-            defaultAnswers.Add("🤖 Твоя писанина спалила мій процессор...");
-            defaultAnswers.Add("🤖 Мій мозок закипів від твоєї писанини...");
+            defaultAnswersUa.Add(" Мій штучний інтелект ще не на стільки розумний щоб тебе зрозуміти...");
+            defaultAnswersUa.Add(" Твоя писанина спалила мій процессор...");
+            defaultAnswersUa.Add(" Мій мозок закипів від твоєї писанини...");
+
+            defaultAnswersRu.Add(" Мой искуственный интеллект тебя не понял...");
+            defaultAnswersRu.Add(" Не могу тебя понять...");
+            defaultAnswersRu.Add(" Не могу понять, что это написано...");
         }
 
 
@@ -129,9 +136,9 @@ namespace BotPlatform.Cryptohacker
         }
         #endregion
 
-        #region Max --> Gender
-        //Логика ответа Макса на имя бота с учетом гендерной принадлежности юзера
-        public string GetGenderAnswer(string gender, string botPic)
+        #region PictoBots --> Wrog Write
+        //Логика ответа ПиктоБотов на непонятный ввод
+        public string GetAfterWrongWriteAnswer(string gender, string botPic)
         {
             switch (botPic)
             {
@@ -152,9 +159,9 @@ namespace BotPlatform.Cryptohacker
         }
         #endregion
 
-        #region Gender + Name
-        //Логика ответа Макса с учетом гендерной принадлежности и имени
-        public string GetGenderNameAnswer(string gender, string usrName, string botPic)
+        #region PictoBots --> Appeal as
+        //Логика ответа Пиктоботов на обращение к ним
+        public string GetAfterBotsAppealAnswer(string gender, string usrName, string botPic)
         {
             switch(botPic)
             {
@@ -191,7 +198,11 @@ namespace BotPlatform.Cryptohacker
                     };
                 case "max-yes-no": return BotSerializer.SendText(GetBotPic(botPic) + " Відповіси \"ТАК\" або \"НІ\" ");
                 case "mark-yes-no": return BotSerializer.SendText(GetBotPic(botPic) + " Ответь \"ДА\" или \"НЕТ\" ");
-                default: return BotSerializer.SendText(defaultAnswers.ElementAt(Rnd(defaultAnswers)));
+                default:
+                    {
+                        if (botPic== "mark") return BotSerializer.SendText(GetBotPic(botPic) + defaultAnswersRu.ElementAt(Rnd(defaultAnswersUa)));
+                        else return BotSerializer.SendText(GetBotPic(botPic) + defaultAnswersUa.ElementAt(Rnd(defaultAnswersUa)));
+                    }
             }
         }
 
