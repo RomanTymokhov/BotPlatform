@@ -15,6 +15,8 @@ namespace BotPlatform.Cryptohacker
         {
             defaultAnswersUa = new List<string>();
             defaultAnswersRu = new List<string>();
+
+            FillDefaultAnswers();
         }
 
         public string GetReplicaRu(string gender)
