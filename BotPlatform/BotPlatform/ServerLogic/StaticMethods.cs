@@ -13,9 +13,9 @@ namespace BotPlatform.ServerLogic
             return rnd.Next(answList.Count);
         }
 
-        public static string Picconstruct(string botPic, bool prefix)
-        {
-            return botPic + "-" + prefix.ToString();
-        }
+        //public static string Picconstruct(string botPic, bool prefix)
+        //{
+        //    return botPic + "-" + prefix.ToString();
+        //}
     }
 }
