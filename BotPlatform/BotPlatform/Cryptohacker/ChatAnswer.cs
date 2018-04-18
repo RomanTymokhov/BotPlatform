@@ -31,7 +31,7 @@ namespace BotPlatform.Cryptohacker
             {
                 case "max": return BotSerializer.SendText(GetBotPic(botPic) + botReplicas.GetReplicaUa(gender));
                 case "mark": return BotSerializer.SendText(GetBotPic(botPic) + botReplicas.GetReplicaRu(gender));
-                default: return BotSerializer.SendText(GetBotPic(botPic) + " ???");
+                default: return BotSerializer.SendText(GetBotPic(botPic) + " ??? Default Txtinput Block");
             }
         }
 
@@ -44,28 +44,30 @@ namespace BotPlatform.Cryptohacker
             {
                 case "max": return BotSerializer.SendText(GetBotPic(botPic) + usrName + botReplicas.GetReplicaUa(gender));
                 case "mark": return BotSerializer.SendText(GetBotPic(botPic) + usrName + botReplicas.GetReplicaRu(gender));
-                default: return BotSerializer.SendText(GetBotPic(botPic) + "????");
+                default: return BotSerializer.SendText(GetBotPic(botPic) + "??? Default BotsAppealAnswer Block");
             }
         }
-        
-        //Логика ответа если на вопрос макса вбита какая-то лобуда...
-        public string GetDefaultAnswer(string botPic, bool defaultAnswer)
+
+        //Логика отвеа на вопрос ДА или НЕТ
+        public string GetYesNoAnswer(string botPic)
         {
             IBotReplicas botReplicasYesNo = new ReplicaYesNoAnswer();
-            IBotReplicas botReplicasDefault = new ReplicaDefaultAnswer();
 
-            //var key = StaticMethods.Picconstruct(botPic, defaultAnswer);
-            if (!defaultAnswer)
-            {
-
-            
-            switch(botPic)
+            switch (botPic)
             {
                 case "max": return BotSerializer.SendText(GetBotPic(botPic) + botReplicasYesNo.GetReplicaUa(botPic));
                 case "mark": return BotSerializer.SendText(GetBotPic(botPic) + botReplicasYesNo.GetReplicaRu(botPic));
-                default: return BotSerializer.SendText(GetBotPic(botPic) + botReplicasDefault.GetReplicaRu(botPic));
+                default: return BotSerializer.SendText(GetBotPic(botPic) + "!!! Default Yes/No Block");
             }
-            } else  return BotSerializer.SendText(GetBotPic(botPic) + botReplicasDefault.GetReplicaRu(botPic));
+
+        }
+        
+        //Логика ответа если на вопрос макса вбита какая-то лобуда...
+        public string GetDefaultAnswer(string botPic)
+        {
+            IBotReplicas botReplicasDefault = new ReplicaDefaultAnswer();
+
+            return BotSerializer.SendText(GetBotPic(botPic) + botReplicasDefault.GetReplicaRu(botPic));
         }
 
         #region Timestamp

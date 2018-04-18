@@ -39,10 +39,10 @@ namespace BotPlatform.Controllers
         {
             switch(lastBlockBeforeAi)
             {
-                case "main-menu-blck": return chatAnswer.GetDefaultAnswer(botPic, false);
-                case "max-yes-no": return chatAnswer.GetDefaultAnswer(botPic, false);
-                case "mark-yes-no": return chatAnswer.GetDefaultAnswer(botPic, false);
-                default: return chatAnswer.GetDefaultAnswer(botPic, true);
+                case "main-menu-blck": return chatAnswer.GetYesNoAnswer(botPic);
+                case "max-yes-no": return chatAnswer.GetYesNoAnswer(botPic);
+                case "mark-yes-no": return chatAnswer.GetYesNoAnswer(botPic);
+                default: return chatAnswer.GetDefaultAnswer(botPic);
             }
         }
     }
