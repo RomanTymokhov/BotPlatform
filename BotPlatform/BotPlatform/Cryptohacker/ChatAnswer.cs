@@ -54,7 +54,9 @@ namespace BotPlatform.Cryptohacker
             IBotReplicas botReplicasYesNo = new ReplicaYesNoAnswer();
             IBotReplicas botReplicasDefault = new ReplicaDefaultAnswer();
 
-            switch(StaticMethods.Picconstruct(botPic,defaultAnswer))
+            var key = StaticMethods.Picconstruct(botPic, defaultAnswer);
+
+            switch(key)
             {
                 case "max-false": return BotSerializer.SendText(GetBotPic(botPic) + botReplicasYesNo.GetReplicaUa(botPic));
                 case "mark-false": return BotSerializer.SendText(GetBotPic(botPic) + botReplicasYesNo.GetReplicaRu(botPic));

@@ -26,7 +26,7 @@ namespace BotPlatform.Controllers
 
             ChatAnswer chatAnswer = new ChatAnswer();
 
-            if (attributes.LastBlockBeforeAi != null) answer = GetAnswerAfterAi(attributes.LastBlockBeforeAi, attributes.BotPic);
+            if (attributes.LastBlockBeforeAi != null) answer = GetAnswerAfterAi(attributes.LastBlockBeforeAi, attributes.BotPic, chatAnswer);
 
             if (attributes.BlockAttribute == "default-answer") answer = chatAnswer.GetAfterWrongTxtinputAnswer(attributes.Gender, attributes.BotPic);
 
@@ -35,11 +35,9 @@ namespace BotPlatform.Controllers
             return answer;
         }
 
-        private string GetAnswerAfterAi(string lastBlockHash, string botPic)
+        private string GetAnswerAfterAi(string lastBlockBeforeAi, string botPic, ChatAnswer chatAnswer)
         {
-            ChatAnswer chatAnswer = new ChatAnswer();
-
-            switch(lastBlockHash)
+            switch(lastBlockBeforeAi)
             {
                 case "main-menu-blck": return chatAnswer.GetDefaultAnswer(botPic, false);
                 case "max-yes-no": return chatAnswer.GetDefaultAnswer(botPic, false);
