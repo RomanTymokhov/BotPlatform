@@ -59,7 +59,6 @@ namespace BotPlatform.Cryptohacker
                 case "mark": return BotSerializer.SendText(GetBotPic(botPic) + botReplicasYesNo.GetReplicaRu(botPic));
                 default: return BotSerializer.SendText(GetBotPic(botPic) + "!!! Default Yes/No Block");
             }
-
         }
         
         //Логика ответа если на вопрос макса вбита какая-то лобуда...
@@ -67,7 +66,12 @@ namespace BotPlatform.Cryptohacker
         {
             IBotReplicas botReplicasDefault = new ReplicaDefaultAnswer();
 
-            return BotSerializer.SendText(GetBotPic(botPic) + botReplicasDefault.GetReplicaRu(botPic));
+            switch (botPic)
+            {
+                case "max": return BotSerializer.SendText(GetBotPic(botPic) + botReplicasDefault.GetReplicaUa(botPic));
+                case "mark": return BotSerializer.SendText(GetBotPic(botPic) + botReplicasDefault.GetReplicaRu(botPic));
+                default: return BotSerializer.SendText(GetBotPic(botPic) + "!!! Default Block");
+            }
         }
 
         #region Timestamp
