@@ -60,7 +60,26 @@ namespace BotPlatform.Cryptohacker
                 default: return BotSerializer.SendText(GetBotPic(botPic) + "!!! Default Yes/No Block");
             }
         }
-        
+
+        //Логика ответа на блок "Main Yes"
+        public string GetAfterYesAnswer()
+        {
+            return "to do";
+        }
+
+        //Логика ответа на блок "Main No"
+        public string GetAfterNoAnswer(string botPic)
+        {
+            IBotReplicas botReplicas = new ReplicaNoAnswer();
+
+            switch(botPic)
+            {
+                case "max": return BotSerializer.SendText(GetBotPic(botPic) + botReplicas.GetReplicaUa(botPic));
+                case "mark": return BotSerializer.SendText(GetBotPic(botPic) + botReplicas.GetReplicaRu(botPic));
+                default: return BotSerializer.SendText(GetBotPic(botPic) + "!!! Default Main-No Block");
+            }
+        }
+
         //Логика ответа если на вопрос макса вбита какая-то лобуда...
         public string GetDefaultAnswer(string botPic)
         {

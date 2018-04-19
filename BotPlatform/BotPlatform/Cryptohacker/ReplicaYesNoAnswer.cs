@@ -33,7 +33,7 @@ namespace BotPlatform.Cryptohacker
         private void FillReplicasUa()
         {
             answerYesNoUa.Add(" Набери \"ДА\" чи \"НІ\" ");
-            answerYesNoUa.Add(" Посто набери \"ДА\" чи \"НІ\" ");
+            answerYesNoUa.Add(" Просто набери \"ДА\" чи \"НІ\" ");
             answerYesNoUa.Add(" Введи \"ДА\" чи \"НІ\" ");
         }
 
