@@ -34,7 +34,7 @@ namespace BotPlatform.Controllers
 
             if (attributes.BlockAttribute == "main-yes") answer = "//to do";
 
-            if (attributes.BlockAttribute == "main-no") answer = chatAnswer.GetAfterNoAnswer(attributes.BotPic);
+            if (attributes.BlockAttribute == "main-no") answer = chatAnswer.GetAfterNoAnswer(attributes.BotPic, attributes.Gender);
 
             return answer;
         }

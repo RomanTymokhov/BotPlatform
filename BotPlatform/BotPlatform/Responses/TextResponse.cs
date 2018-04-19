@@ -6,25 +6,25 @@ namespace BotPlatform.Responses
     public class TextResponse
     {
         [JsonProperty(PropertyName = "messages")]
-        public List<Message> textResponse;
+        public List<Text> textResponse;
 
         public TextResponse()
         {
-            textResponse = new List<Message>();
+            textResponse = new List<Text>();
         }
 
-        public void CreateResponse(Message msg)
+        public void CreateResponse(Text msg)
         {
             textResponse.Add(msg);
         }
     }
 
-    public class Message
+    public class Text
     {
         [JsonProperty(PropertyName = "text")]
         public string message;
 
-        public Message(string msg)
+        public Text(string msg)
         {
             message = msg;
         }

@@ -18,6 +18,7 @@ namespace BotPlatform.Cryptohacker
             {
                 case "max": return "🤖 ";
                 case "mark": return "👨‍🎓 ";
+                case "chart": return "📈 ";
                 default: return "";
             }
         }
@@ -29,9 +30,24 @@ namespace BotPlatform.Cryptohacker
 
             switch (botPic)
             {
-                case "max": return BotSerializer.SendText(GetBotPic(botPic) + botReplicas.GetReplicaUa(gender));
-                case "mark": return BotSerializer.SendText(GetBotPic(botPic) + botReplicas.GetReplicaRu(gender));
-                default: return BotSerializer.SendText(GetBotPic(botPic) + " ??? Default Txtinput Block");
+                case "max":
+                    {
+                        List<string> messages = new List<string>();
+                        messages.Add(GetBotPic(botPic) + botReplicas.GetReplicaUa(gender));
+                        return BotSender.SendText(messages);
+                    }
+                case "mark":
+                    {
+                        List<string> messages = new List<string>();
+                        messages.Add(GetBotPic(botPic) + botReplicas.GetReplicaRu(gender));
+                        return BotSender.SendText(messages);
+                    }
+                default:
+                    {
+                        List<string> messages = new List<string>();
+                        messages.Add(GetBotPic(botPic) + " ??? Default Txtinput Answer");
+                        return BotSender.SendText(messages);
+                    }
             }
         }
 
@@ -42,9 +58,24 @@ namespace BotPlatform.Cryptohacker
 
             switch(botPic)
             {
-                case "max": return BotSerializer.SendText(GetBotPic(botPic) + usrName + botReplicas.GetReplicaUa(gender));
-                case "mark": return BotSerializer.SendText(GetBotPic(botPic) + usrName + botReplicas.GetReplicaRu(gender));
-                default: return BotSerializer.SendText(GetBotPic(botPic) + "??? Default BotsAppealAnswer Block");
+                case "max":
+                    {
+                        List<string> messages = new List<string>();
+                        messages.Add(GetBotPic(botPic) + usrName + botReplicas.GetReplicaUa(gender));
+                        return BotSender.SendText(messages);
+                    }
+                case "mark":
+                    {
+                        List<string> messages = new List<string>();
+                        messages.Add(GetBotPic(botPic) + usrName + botReplicas.GetReplicaRu(gender));
+                        return BotSender.SendText(messages);
+                    }
+                default:
+                    {
+                        List<string> messages = new List<string>();
+                        messages.Add(GetBotPic(botPic) + "??? Default BotsAppealAnswer Answer");
+                        return BotSender.SendText(messages);
+                    }
             }
         }
 
@@ -55,9 +86,24 @@ namespace BotPlatform.Cryptohacker
 
             switch (botPic)
             {
-                case "max": return BotSerializer.SendText(GetBotPic(botPic) + botReplicasYesNo.GetReplicaUa(botPic));
-                case "mark": return BotSerializer.SendText(GetBotPic(botPic) + botReplicasYesNo.GetReplicaRu(botPic));
-                default: return BotSerializer.SendText(GetBotPic(botPic) + "!!! Default Yes/No Block");
+                case "max":
+                    {
+                        List<string> messages = new List<string>();
+                        messages.Add(GetBotPic(botPic) + botReplicasYesNo.GetReplicaUa(botPic));
+                        return BotSender.SendText(messages);
+                    }
+                case "mark":
+                    {
+                        List<string> messages = new List<string>();
+                        messages.Add(GetBotPic(botPic) + botReplicasYesNo.GetReplicaRu(botPic));
+                        return BotSender.SendText(messages);
+                    }
+                default:
+                    {
+                        List<string> messages = new List<string>();
+                        messages.Add(GetBotPic(botPic) + "!!! Default Yes/No Answer");
+                        return BotSender.SendText(messages);
+                    }
             }
         }
 
@@ -68,15 +114,33 @@ namespace BotPlatform.Cryptohacker
         }
 
         //Логика ответа на блок "Main No"
-        public string GetAfterNoAnswer(string botPic)
+        public string GetAfterNoAnswer(string botPic, string gender)
         {
             IBotReplicas botReplicas = new ReplicaNoAnswer();
+            IBotReplicas botReplicasSec = new ReplicaAfterNoAnswer();
 
-            switch(botPic)
+            switch (botPic)
             {
-                case "max": return BotSerializer.SendText(GetBotPic(botPic) + botReplicas.GetReplicaUa(botPic));
-                case "mark": return BotSerializer.SendText(GetBotPic(botPic) + botReplicas.GetReplicaRu(botPic));
-                default: return BotSerializer.SendText(GetBotPic(botPic) + "!!! Default Main-No Block");
+                case "max":
+                    {
+                        List<string> messages = new List<string>();
+                        messages.Add(GetBotPic(botPic) + botReplicas.GetReplicaUa(gender));
+                        messages.Add(GetBotPic(botPic) + botReplicasSec.GetReplicaUa(gender));
+                        return BotSender.SendText(messages);
+                    }
+                case "mark":
+                    {
+                        List<string> messages = new List<string>();
+                        messages.Add(GetBotPic(botPic) + botReplicas.GetReplicaRu(gender));
+                        messages.Add(GetBotPic(botPic) + botReplicasSec.GetReplicaRu(gender));
+                        return BotSender.SendText(messages);
+                    }
+                default:
+                    {
+                        List<string> messages = new List<string>();
+                        messages.Add(GetBotPic(botPic) + "!!! Default Main-No Answer");
+                        return BotSender.SendText(messages);
+                    }
             }
         }
 
@@ -87,9 +151,24 @@ namespace BotPlatform.Cryptohacker
 
             switch (botPic)
             {
-                case "max": return BotSerializer.SendText(GetBotPic(botPic) + botReplicasDefault.GetReplicaUa(botPic));
-                case "mark": return BotSerializer.SendText(GetBotPic(botPic) + botReplicasDefault.GetReplicaRu(botPic));
-                default: return BotSerializer.SendText(GetBotPic(botPic) + "!!! Default Block");
+                case "max":
+                    {
+                        List<string> messages = new List<string>();
+                        messages.Add(GetBotPic(botPic) + botReplicasDefault.GetReplicaUa(botPic));
+                        return BotSender.SendText(messages);
+                    }
+                case "mark":
+                    {
+                        List<string> messages = new List<string>();
+                        messages.Add(GetBotPic(botPic) + botReplicasDefault.GetReplicaRu(botPic));
+                        return BotSender.SendText(messages);
+                    }
+                default:
+                    {
+                        List<string> messages = new List<string>();
+                        messages.Add(GetBotPic(botPic) + "!!! Default Block");
+                        return BotSender.SendText(messages);
+                    }
             }
         }
 
@@ -97,7 +176,8 @@ namespace BotPlatform.Cryptohacker
 
         public string GetTimestamp(string timestamp)
         {
-            return BotSerializer.SendText("Час на сервері: " + timestamp);
+            //return BotSender.SendText("Час на сервері: " + timestamp);
+            return "Timestamp";
         }
 
         #endregion
@@ -105,7 +185,8 @@ namespace BotPlatform.Cryptohacker
         #region Currensys
         public string GetCurrensy(string marketPair, string currValue)
         {
-            return BotSerializer.SendText("📈 " + marketPair.ToUpper() + ": " + currValue + " UAH");
+            //return BotSender.SendText("📈 " + marketPair.ToUpper() + ": " + currValue + " UAH");
+            return "Currency";
         }
         #endregion
     }

@@ -7,15 +7,11 @@ using System.Threading.Tasks;
 
 namespace BotPlatform.ServerLogic
 {
-    public static class BotSerializer
+    public static class BotSender
     {
-        public static string SendText(string message)
+        public static string SendText(List<string> messages)
         {
-            TextResponse txtResp = new TextResponse();
-            Message msg = new Message(message);
-            txtResp.CreateResponse(msg);
-
-            return JsonConvert.SerializeObject(txtResp);
+            return JsonConvert.SerializeObject(CreateResponse(messages));
         }
 
         public static string SendMedia(string mediaType, string mediaUrl)
@@ -30,6 +26,18 @@ namespace BotPlatform.ServerLogic
         public static T Deserialize<T>(string json)
         {
             return JsonConvert.DeserializeObject<T>(json);            
+        }
+
+        private static TextResponse CreateResponse(List<string> msgList)
+        {
+            TextResponse text = new TextResponse();
+
+            foreach (var msg in msgList)
+            {
+                text.CreateResponse(new Text(msg));
+            }
+
+            return text;
         }
     }
 }
