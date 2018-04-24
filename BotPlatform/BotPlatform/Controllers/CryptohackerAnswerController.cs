@@ -26,27 +26,28 @@ namespace BotPlatform.Controllers
 
             ChatAnswer chatAnswer = new ChatAnswer();
 
-            if (attributes.LastBlockBeforeAi != null) answer = GetAnswerAfterAi(attributes.LastBlockBeforeAi, attributes.BotPic, chatAnswer);
+            if (attributes.LastBlockBeforeAi != null) answer = GetAnswerAfterAi(attributes, chatAnswer);
 
             if (attributes.BlockAttribute == "default-answer") answer = chatAnswer.GetAfterWrongTxtinputAnswer(attributes.Gender, attributes.BotPic);
 
             if (attributes.BlockAttribute == "yes-no") answer = chatAnswer.GetAfterBotsAppealAnswer(attributes.Gender, attributes.FirstName, attributes.BotPic);
 
-            if (attributes.BlockAttribute == "main-yes") answer = "//to do";
+            //if (attributes.BlockAttribute == "main-yes") answer = "//to do";
 
-            if (attributes.BlockAttribute == "main-no") answer = chatAnswer.GetAfterNoAnswer(attributes.BotPic, attributes.Gender);
+            //if (attributes.BlockAttribute == "main-no") answer = chatAnswer
 
             return answer;
         }
 
-        private string GetAnswerAfterAi(string lastBlockBeforeAi, string botPic, ChatAnswer chatAnswer)
+        private string GetAnswerAfterAi(AcceptedAttributes attributes, ChatAnswer chatAnswer)
         {
-            switch(lastBlockBeforeAi)
+            switch(attributes.LastBlockBeforeAi)
             {
-                case "main-menu-blck": return chatAnswer.GetYesNoAnswer(botPic);
-                case "max-yes-no": return chatAnswer.GetYesNoAnswer(botPic);
-                case "mark-yes-no": return chatAnswer.GetYesNoAnswer(botPic);
-                default: return chatAnswer.GetDefaultAnswer(botPic);
+                case "main-menu-blck": return chatAnswer.GetYesNoAnswer(attributes.BotPic);
+                case "main-no-blck": return chatAnswer.GetAfterNoAnswer(attributes.BotPic, attributes.Gender);
+                case "max-yes-no": return chatAnswer.GetYesNoAnswer(attributes.BotPic);
+                case "mark-yes-no": return chatAnswer.GetYesNoAnswer(attributes.BotPic);
+                default: return chatAnswer.GetDefaultAnswer(attributes.BotPic);
             }
         }
     }
