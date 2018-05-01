@@ -34,19 +34,19 @@ namespace BotPlatform.Cryptohacker
                     {
                         List<string> messages = new List<string>();
                         messages.Add(GetBotPic(botPic) + botReplicas.GetReplicaUa(gender));
-                        return BotSender.SendText(messages);
+                        return BotManager.SendText(messages);
                     }
                 case "mark":
                     {
                         List<string> messages = new List<string>();
                         messages.Add(GetBotPic(botPic) + botReplicas.GetReplicaRu(gender));
-                        return BotSender.SendText(messages);
+                        return BotManager.SendText(messages);
                     }
                 default:
                     {
                         List<string> messages = new List<string>();
                         messages.Add(GetBotPic(botPic) + " ??? Default Txtinput Answer");
-                        return BotSender.SendText(messages);
+                        return BotManager.SendText(messages);
                     }
             }
         }
@@ -62,19 +62,19 @@ namespace BotPlatform.Cryptohacker
                     {
                         List<string> messages = new List<string>();
                         messages.Add(GetBotPic(botPic) + usrName + botReplicas.GetReplicaUa(gender));
-                        return BotSender.SendText(messages);
+                        return BotManager.SendText(messages);
                     }
                 case "mark":
                     {
                         List<string> messages = new List<string>();
                         messages.Add(GetBotPic(botPic) + usrName + botReplicas.GetReplicaRu(gender));
-                        return BotSender.SendText(messages);
+                        return BotManager.SendText(messages);
                     }
                 default:
                     {
                         List<string> messages = new List<string>();
                         messages.Add(GetBotPic(botPic) + "??? Default BotsAppealAnswer Answer");
-                        return BotSender.SendText(messages);
+                        return BotManager.SendText(messages);
                     }
             }
         }
@@ -90,19 +90,19 @@ namespace BotPlatform.Cryptohacker
                     {
                         List<string> messages = new List<string>();
                         messages.Add(GetBotPic(botPic) + botReplicasYesNo.GetReplicaUa(botPic));
-                        return BotSender.SendText(messages);
+                        return BotManager.SendText(messages);
                     }
                 case "mark":
                     {
                         List<string> messages = new List<string>();
                         messages.Add(GetBotPic(botPic) + botReplicasYesNo.GetReplicaRu(botPic));
-                        return BotSender.SendText(messages);
+                        return BotManager.SendText(messages);
                     }
                 default:
                     {
                         List<string> messages = new List<string>();
                         messages.Add(GetBotPic(botPic) + "!!! Default Yes/No Answer");
-                        return BotSender.SendText(messages);
+                        return BotManager.SendText(messages);
                     }
             }
         }
@@ -126,20 +126,20 @@ namespace BotPlatform.Cryptohacker
                         List<string> messages = new List<string>();
                         messages.Add(GetBotPic(botPic) + botReplicas.GetReplicaUa(gender));
                         messages.Add(GetBotPic(botPic) + botReplicasSec.GetReplicaUa(gender));
-                        return BotSender.SendText(messages);
+                        return BotManager.SendText(messages);
                     }
                 case "mark":
                     {
                         List<string> messages = new List<string>();
                         messages.Add(GetBotPic(botPic) + botReplicas.GetReplicaRu(gender));
                         messages.Add(GetBotPic(botPic) + botReplicasSec.GetReplicaRu(gender));
-                        return BotSender.SendText(messages);
+                        return BotManager.SendText(messages);
                     }
                 default:
                     {
                         List<string> messages = new List<string>();
                         messages.Add(GetBotPic(botPic) + "!!! Default Main-No Answer");
-                        return BotSender.SendText(messages);
+                        return BotManager.SendText(messages);
                     }
             }
         }
@@ -155,19 +155,19 @@ namespace BotPlatform.Cryptohacker
                     {
                         List<string> messages = new List<string>();
                         messages.Add(GetBotPic(botPic) + botReplicasDefault.GetReplicaUa(botPic));
-                        return BotSender.SendText(messages);
+                        return BotManager.SendText(messages);
                     }
                 case "mark":
                     {
                         List<string> messages = new List<string>();
                         messages.Add(GetBotPic(botPic) + botReplicasDefault.GetReplicaRu(botPic));
-                        return BotSender.SendText(messages);
+                        return BotManager.SendText(messages);
                     }
                 default:
                     {
                         List<string> messages = new List<string>();
                         messages.Add(GetBotPic(botPic) + "!!! Default Block");
-                        return BotSender.SendText(messages);
+                        return BotManager.SendText(messages);
                     }
             }
         }

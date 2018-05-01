@@ -15,7 +15,7 @@ namespace BotPlatform.Controllers
         [HttpGet]
         public string Get()
         {
-            return BotSender.SendMedia(MediaAttachType.image.ToString(), "https://static.intercomassets.com/avatars/482552/square_128/DSCF1621LS-1463954543.png?1463954543");
+            return BotManager.SendMedia(MediaAttachType.image.ToString(), "https://static.intercomassets.com/avatars/482552/square_128/DSCF1621LS-1463954543.png?1463954543");
         }
     }
 }

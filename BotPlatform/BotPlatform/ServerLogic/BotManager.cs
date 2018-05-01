@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BotPlatform.ServerLogic
 {
-    public static class BotSender
+    public static class BotManager
     {
         public static string SendText(List<string> messages)
         {
@@ -28,13 +28,15 @@ namespace BotPlatform.ServerLogic
             return JsonConvert.DeserializeObject<T>(json);            
         }
 
+
+
         private static TextResponse CreateResponse(List<string> msgList)
         {
             TextResponse text = new TextResponse();
 
             foreach (var msg in msgList)
             {
-                text.CreateResponse(new Text(msg));
+                text.CreateMessage(new Text(msg));
             }
 
             return text;

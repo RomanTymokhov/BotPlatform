@@ -13,7 +13,7 @@ namespace BotPlatform.Responses
             textResponse = new List<Text>();
         }
 
-        public void CreateResponse(Text msg)
+        public void CreateMessage(Text msg)
         {
             textResponse.Add(msg);
         }

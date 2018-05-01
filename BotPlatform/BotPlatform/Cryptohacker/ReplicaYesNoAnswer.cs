@@ -22,12 +22,12 @@ namespace BotPlatform.Cryptohacker
 
         public string GetReplicaRu(string gender)
         {
-            return answerYesNoRu.ElementAt(StaticMethods.Rnd(answerYesNoRu));
+            return answerYesNoRu.ElementAt(ComplementaryMethods.Rnd(answerYesNoRu));
         }
 
         public string GetReplicaUa(string gender)
         {
-            return answerYesNoUa.ElementAt(StaticMethods.Rnd(answerYesNoUa));
+            return answerYesNoUa.ElementAt(ComplementaryMethods.Rnd(answerYesNoUa));
         }
 
         private void FillReplicasUa()

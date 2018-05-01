@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BotPlatform.ChatExtentions;
 using BotPlatform.Cryptohacker;
 using BotPlatform.Responses;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BotPlatform.Controllers
@@ -15,12 +16,10 @@ namespace BotPlatform.Controllers
         [HttpGet]
         public string Get()
         {
-            AcceptedAttributes attributes = new AcceptedAttributes(Request);
-
-            return GetAnswer(attributes);
+            return GetAnswer(new UserAttributes(Request).userAttributesList);
         }
 
-        private string GetAnswer(AcceptedAttributes attributes)
+        private string GetAnswer(List<IUserAttributes> attributes)
         {
             string answer = null;
 
@@ -39,7 +38,7 @@ namespace BotPlatform.Controllers
             return answer;
         }
 
-        private string GetAnswerAfterAi(AcceptedAttributes attributes, ChatAnswer chatAnswer)
+        private string GetAnswerAfterAi(UserAttributes attributes, ChatAnswer chatAnswer)
         {
             switch(attributes.LastBlockBeforeAi)
             {

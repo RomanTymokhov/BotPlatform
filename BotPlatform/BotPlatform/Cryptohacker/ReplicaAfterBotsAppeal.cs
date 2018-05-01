@@ -26,14 +26,14 @@ namespace BotPlatform.Cryptohacker
 
         public string GetReplicaRu(string gender)
         {
-            if (gender == "male") return maleCalledAnswersRu.ElementAt(StaticMethods.Rnd(maleCalledAnswersRu));
-            else return femaleCalledAnswersRu.ElementAt(StaticMethods.Rnd(femaleCalledAnswersRu));
+            if (gender == "male") return maleCalledAnswersRu.ElementAt(ComplementaryMethods.Rnd(maleCalledAnswersRu));
+            else return femaleCalledAnswersRu.ElementAt(ComplementaryMethods.Rnd(femaleCalledAnswersRu));
         }
 
         public string GetReplicaUa(string gender)
         {
-            if (gender == "male") return maleCalledAnswersUa.ElementAt(StaticMethods.Rnd(maleCalledAnswersUa));
-            else return femaleCalledAnswersUa.ElementAt(StaticMethods.Rnd(femaleCalledAnswersUa));
+            if (gender == "male") return maleCalledAnswersUa.ElementAt(ComplementaryMethods.Rnd(maleCalledAnswersUa));
+            else return femaleCalledAnswersUa.ElementAt(ComplementaryMethods.Rnd(femaleCalledAnswersUa));
         }
 
         private void FillReplicasRu()
