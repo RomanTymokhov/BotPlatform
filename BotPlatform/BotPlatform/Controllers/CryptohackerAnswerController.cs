@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BotPlatform.ChatExtentions;
+using BotPlatform.Data.ChatAttrData;
+using BotPlatform.Data.ChatAttrData.Interfaces;
 using BotPlatform.Cryptohacker;
-using BotPlatform.Responses;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BotPlatform.Controllers
@@ -16,37 +16,51 @@ namespace BotPlatform.Controllers
         [HttpGet]
         public string Get()
         {
-            return GetAnswer(new UserAttributes(Request).userAttributesList);
-        }
-
-        private string GetAnswer(List<IUserAttributes> attributes)
-        {
-            string answer = null;
-
+            ChatAttributes chatAttributes = new ChatAttributes(Request);
             ChatAnswer chatAnswer = new ChatAnswer();
 
-            if (attributes.LastBlockBeforeAi != null) answer = GetAnswerAfterAi(attributes, chatAnswer);
+            //Тут будет подключение к боту по ссылке
+            //Бот должен принять аттрибуты и вернуть ответы
 
-            if (attributes.BlockAttribute == "default-answer") answer = chatAnswer.GetAfterWrongTxtinputAnswer(attributes.Gender, attributes.BotPic);
+            if (chatAttributes.GetCurrentAttribute<AiRoutAttributes>() != null) return GetAiAnswer(chatAttributes, chatAnswer);
+            else return GetNavAnswer(chatAttributes, chatAnswer);
+        }
 
-            if (attributes.BlockAttribute == "yes-no") answer = chatAnswer.GetAfterBotsAppealAnswer(attributes.Gender, attributes.FirstName, attributes.BotPic);
+        private string GetNavAnswer(ChatAttributes attribute, ChatAnswer chatAnswer)
+        {
+            var block = attribute.GetCurrentAttribute<MainRoutAttributes>().CurrentBlockName;
+            var name = attribute.GetCurrentAttribute<CustomerAttributes>().FirstName;
+            var gender = attribute.GetCurrentAttribute<CustomerAttributes>().Gender;
+            var botPic = attribute.GetCurrentAttribute<ContentAttributes>().BotPic;
+
+            //дальнейшая оптимизация будет заключаться в обобщении данного метода
+            //в ChatAnswr() методы необходимо передавать объекты IChatAttributes
+
+            if (block == "default-answer") return chatAnswer.GetAfterWrongTxtinputAnswer(gender, botPic);
+            else
+                {
+                    if (block == "yes-no") return chatAnswer.GetAfterBotsAppealAnswer(gender, name, botPic);
+                    else return chatAnswer.GetErrorAnswer(block);
+                }
 
             //if (attributes.BlockAttribute == "main-yes") answer = "//to do";
 
             //if (attributes.BlockAttribute == "main-no") answer = chatAnswer
-
-            return answer;
         }
 
-        private string GetAnswerAfterAi(UserAttributes attributes, ChatAnswer chatAnswer)
+        private string GetAiAnswer(ChatAttributes attribute, ChatAnswer chatAnswer)
         {
-            switch(attributes.LastBlockBeforeAi)
+            var block = attribute.GetCurrentAttribute<AiRoutAttributes>().LastBlockBeforeAi;
+            var gender = attribute.GetCurrentAttribute<CustomerAttributes>().Gender;
+            var botPic = attribute.GetCurrentAttribute<ContentAttributes>().BotPic;
+
+            switch (block)
             {
-                case "main-menu-blck": return chatAnswer.GetYesNoAnswer(attributes.BotPic);
-                case "main-no-blck": return chatAnswer.GetAfterNoAnswer(attributes.BotPic, attributes.Gender);
-                case "max-yes-no": return chatAnswer.GetYesNoAnswer(attributes.BotPic);
-                case "mark-yes-no": return chatAnswer.GetYesNoAnswer(attributes.BotPic);
-                default: return chatAnswer.GetDefaultAnswer(attributes.BotPic);
+                case "main-menu-blck": return chatAnswer.GetYesNoAnswer(botPic);
+                case "main-no-blck": return chatAnswer.GetAfterNoAnswer(botPic, gender);
+                case "max-yes-no": return chatAnswer.GetYesNoAnswer(botPic);
+                case "mark-yes-no": return chatAnswer.GetYesNoAnswer(botPic);
+                default: return chatAnswer.GetDefaultAnswer(botPic);
             }
         }
     }

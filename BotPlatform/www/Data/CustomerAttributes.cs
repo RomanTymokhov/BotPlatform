@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BotPlatform.Data.ChatExtentions
 {
-    public class CustomerAttributes : ChatAttributes, IChatAttributes
+    public class CustomerAttributes : IChatAttributes
     {
         private static CustomerAttributes instance;
         private static object syncRoot = new Object();
@@ -24,7 +24,7 @@ namespace BotPlatform.Data.ChatExtentions
 
         private static bool nullFlag;
 
-        public CustomerAttributes(HttpRequest Request) : base(Request)
+        public CustomerAttributes(HttpRequest Request)
         {
             MessengerUserId = Request.Query.FirstOrDefault(p => p.Key == "messenger user id").Value;
             ChatfuelUserId = Request.Query.FirstOrDefault(p => p.Key == "chatfuel user id").Value;
@@ -40,7 +40,7 @@ namespace BotPlatform.Data.ChatExtentions
             SetNullFlag();
         }
 
-        public static void CreateInstance(HttpRequest request)
+        public static void CreateInstance(HttpRequest request, List<IChatAttributes> ChatAttributesList)
         {
             if (instance == null)
             {
@@ -50,7 +50,7 @@ namespace BotPlatform.Data.ChatExtentions
                     {
                         instance = new CustomerAttributes(request);
 
-                        if (nullFlag) chatAttributesList.Add(instance);
+                        if (nullFlag) ChatAttributesList.Add(instance);
                     }
 
                 }

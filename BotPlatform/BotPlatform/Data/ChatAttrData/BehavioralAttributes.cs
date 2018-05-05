@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using BotPlatform.Data.ChatAttrData.Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BotPlatform.Data.ChatExtentions
+namespace BotPlatform.Data.ChatAttrData
 {
-    public class BehavioralAttributes: ChatAttributes, IChatAttributes
+    public class BehavioralAttributes: IChatAttributes
     {
         private static BehavioralAttributes instance;
         private static object syncRoot = new Object();
@@ -16,7 +17,7 @@ namespace BotPlatform.Data.ChatExtentions
 
         private static bool nullFlag;
 
-        protected BehavioralAttributes(HttpRequest Request) : base(Request)
+        protected BehavioralAttributes(HttpRequest Request) 
         {
             LastUserFreeFormInput = Request.Query.FirstOrDefault(p => p.Key == "last user freeform input").Value;
             LastClickedButtonName = Request.Query.FirstOrDefault(p => p.Key == "last clicked button name").Value;
@@ -24,7 +25,7 @@ namespace BotPlatform.Data.ChatExtentions
             SetNullFlag();
         }
 
-        public static void CreateInstance(HttpRequest request)
+        public static void CreateInstance(HttpRequest request, List<IChatAttributes> ChatAttributesList)
         {
             if (instance == null)
             {
@@ -34,7 +35,7 @@ namespace BotPlatform.Data.ChatExtentions
                     {
                         instance = new BehavioralAttributes(request);
 
-                        if (nullFlag) chatAttributesList.Add(instance);
+                        if (nullFlag) ChatAttributesList.Add(instance);
                     }
                         
                 }

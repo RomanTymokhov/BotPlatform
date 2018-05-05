@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using BotPlatform.Data.ChatAttrData.Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BotPlatform.Data.ChatExtentions
+namespace BotPlatform.Data.ChatAttrData
 {
-    public class UrlParamAttributes : ChatAttributes, IChatAttributes
+    public class UrlParamAttributes : IChatAttributes
     {
         private static UrlParamAttributes instance;
         private static object syncRoot = new Object();
@@ -16,7 +17,7 @@ namespace BotPlatform.Data.ChatExtentions
 
         private static bool nullFlag;
 
-        public UrlParamAttributes(HttpRequest Request) : base(Request)
+        public UrlParamAttributes(HttpRequest Request)
         {
             Source = Request.Query.FirstOrDefault(p => p.Key == "source").Value;
             Ref = Request.Query.FirstOrDefault(p => p.Key == "ref").Value;
@@ -24,7 +25,7 @@ namespace BotPlatform.Data.ChatExtentions
             SetNullFlag();
         }
 
-        public static void CreateInstance(HttpRequest request)
+        public static void CreateInstance(HttpRequest request, List<IChatAttributes> ChatAttributesList)
         {
             if (instance == null)
             {
@@ -34,7 +35,7 @@ namespace BotPlatform.Data.ChatExtentions
                     {
                         instance = new UrlParamAttributes(request);
 
-                        if (nullFlag) chatAttributesList.Add(instance);
+                        if (nullFlag) ChatAttributesList.Add(instance);
                     }
 
                 }

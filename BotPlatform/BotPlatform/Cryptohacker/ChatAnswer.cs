@@ -172,6 +172,13 @@ namespace BotPlatform.Cryptohacker
             }
         }
 
+        public string GetErrorAnswer(string block)
+        {
+            List<string> messages = new List<string>();
+            messages.Add("!!! Error: block is --> " + block + " <--");
+            return BotManager.SendText(messages);
+        }
+
         #region Timestamp
 
         public string GetTimestamp(string timestamp)

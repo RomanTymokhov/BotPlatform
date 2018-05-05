@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using BotPlatform.Data.ChatAttrData.Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BotPlatform.Data.ChatExtentions
+namespace BotPlatform.Data.ChatAttrData
 {
-    public class ContentAttributes : ChatAttributes, IChatAttributes
+    public class ContentAttributes : IChatAttributes
     {
         private static ContentAttributes instance;
         private static object syncRoot = new Object();
@@ -15,14 +16,14 @@ namespace BotPlatform.Data.ChatExtentions
 
         private static bool nullFlag;
 
-        public ContentAttributes(HttpRequest Request) : base(Request)
+        public ContentAttributes(HttpRequest Request)
         {
             BotPic = Request.Query.FirstOrDefault(p => p.Key == "bot-pic").Value;
 
             SetNullFlag();
         }
 
-        public static void CreateInstance(HttpRequest request)
+        public static void CreateInstance(HttpRequest request, List<IChatAttributes> ChatAttributesList)
         {
             if (instance == null)
             {
@@ -32,7 +33,7 @@ namespace BotPlatform.Data.ChatExtentions
                     {
                         instance = new ContentAttributes(request);
 
-                        if (nullFlag) chatAttributesList.Add(instance);
+                        if (nullFlag) ChatAttributesList.Add(instance);
                     }
 
                 }
