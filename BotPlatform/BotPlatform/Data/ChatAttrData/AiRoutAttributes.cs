@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace BotPlatform.Data.ChatAttrData
 {
-    public class AiRoutAttributes : IRoutAttributes
+    public class AiRoutAttributes : IRoutAttributes, IChatAttributes
     {
-        private static AiRoutAttributes instance;
-        private static object syncRoot = new Object();
+        //private static AiRoutAttributes instance;
+        //private static object syncRoot = new Object();
         
         public string LastBlockBeforeAi { get; private set; }
 
-        private static bool nullFlag;
+        public bool nullFlag;
 
         public AiRoutAttributes(HttpRequest Request)
         {
@@ -23,22 +23,22 @@ namespace BotPlatform.Data.ChatAttrData
             SetNullFlag();
         }
 
-        public static void CreateInstance(HttpRequest request, List<IChatAttributes> ChatAttributesList)
-        {
-            if (instance == null)
-            {
-                lock (syncRoot)
-                {
-                    if (instance == null)
-                    {
-                        instance = new AiRoutAttributes(request);
+        //public static void CreateInstance(HttpRequest request, List<IChatAttributes> ChatAttributesList)
+        //{
+        //    if (instance == null)
+        //    {
+        //        lock (syncRoot)
+        //        {
+        //            if (instance == null)
+        //            {
+        //                instance = new AiRoutAttributes(request);
 
-                        if (nullFlag) ChatAttributesList.Add(instance);
-                    }
+        //                if (nullFlag) ChatAttributesList.Add(instance);
+        //            }
 
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
 
         private void SetNullFlag()
         {

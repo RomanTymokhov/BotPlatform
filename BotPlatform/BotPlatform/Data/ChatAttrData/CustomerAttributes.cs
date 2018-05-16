@@ -9,9 +9,6 @@ namespace BotPlatform.Data.ChatAttrData
 {
     public class CustomerAttributes : IChatAttributes
     {
-        private static CustomerAttributes instance;
-        private static object syncRoot = new Object();
-
         public string MessengerUserId { get; private set; }
         public string ChatfuelUserId { get; private set; }
         public string ProfilePicUrl { get; private set; }
@@ -23,7 +20,7 @@ namespace BotPlatform.Data.ChatAttrData
         public string Gender { get; private set; }
         public string Locale { get; private set; }
 
-        private static bool nullFlag;
+        public bool nullFlag;
 
         public CustomerAttributes(HttpRequest Request)
         {
@@ -39,23 +36,6 @@ namespace BotPlatform.Data.ChatAttrData
             Locale = Request.Query.FirstOrDefault(p => p.Key == "locale").Value;
 
             SetNullFlag();
-        }
-
-        public static void CreateInstance(HttpRequest request, List<IChatAttributes> ChatAttributesList)
-        {
-            if (instance == null)
-            {
-                lock (syncRoot)
-                {
-                    if (instance == null)
-                    {
-                        instance = new CustomerAttributes(request);
-
-                        if (nullFlag) ChatAttributesList.Add(instance);
-                    }
-
-                }
-            }
         }
 
         private void SetNullFlag()

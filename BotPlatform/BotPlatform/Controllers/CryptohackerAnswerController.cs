@@ -22,25 +22,26 @@ namespace BotPlatform.Controllers
             //Тут будет подключение к боту по ссылке
             //Бот должен принять аттрибуты и вернуть ответы
 
-            if (chatAttributes.GetCurrentAttribute<AiRoutAttributes>() != null) return GetAiAnswer(chatAttributes, chatAnswer);
-            else return GetNavAnswer(chatAttributes, chatAnswer);
+            if (chatAttributes.GetCurrentAttribute<AiRoutAttributes>() != null)
+                 return GetAiAnswerAsync(chatAttributes, chatAnswer).GetAwaiter().GetResult();
+            else return GetNavAnswer(chatAttributes, chatAnswer).GetAwaiter().GetResult();
         }
 
-        private string GetNavAnswer(ChatAttributes attribute, ChatAnswer chatAnswer)
+        private async Task<string> GetNavAnswer(ChatAttributes attribute, ChatAnswer chatAnswer)
         {
-            var block = attribute.GetCurrentAttribute<MainRoutAttributes>().CurrentBlockName;
-            var name = attribute.GetCurrentAttribute<CustomerAttributes>().FirstName;
-            var gender = attribute.GetCurrentAttribute<CustomerAttributes>().Gender;
-            var botPic = attribute.GetCurrentAttribute<ContentAttributes>().BotPic;
-
             //дальнейшая оптимизация будет заключаться в обобщении данного метода
             //в ChatAnswr() методы необходимо передавать объекты IChatAttributes
 
-            if (block == "default-answer") return chatAnswer.GetAfterWrongTxtinputAnswer(gender, botPic);
+            if (await Task.Factory.StartNew(() => attribute.GetCurrentAttribute<MainRoutAttributes>().CurrentBlockName) == "default-answer")
+                return chatAnswer.GetAfterWrongTxtinputAnswer(await Task.Factory.StartNew(() => attribute.GetCurrentAttribute<CustomerAttributes>().Gender), 
+                                                              await Task.Factory.StartNew(() => attribute.GetCurrentAttribute<ContentAttributes>().BotPic));
             else
                 {
-                    if (block == "yes-no") return chatAnswer.GetAfterBotsAppealAnswer(gender, name, botPic);
-                    else return chatAnswer.GetErrorAnswer(block);
+                    if (await Task.Factory.StartNew(() => attribute.GetCurrentAttribute<MainRoutAttributes>().CurrentBlockName == "yes-no")) 
+                         return chatAnswer.GetAfterBotsAppealAnswer(await Task.Factory.StartNew(() => attribute.GetCurrentAttribute<CustomerAttributes>().Gender),
+                                                                    await Task.Factory.StartNew(() => attribute.GetCurrentAttribute<CustomerAttributes>().FirstName), 
+                                                                    await Task.Factory.StartNew(() => attribute.GetCurrentAttribute<ContentAttributes>().BotPic));
+                    else return chatAnswer.GetErrorAnswer(await Task.Factory.StartNew(() => attribute.GetCurrentAttribute<MainRoutAttributes>().CurrentBlockName));
                 }
 
             //if (attributes.BlockAttribute == "main-yes") answer = "//to do";
@@ -48,19 +49,16 @@ namespace BotPlatform.Controllers
             //if (attributes.BlockAttribute == "main-no") answer = chatAnswer
         }
 
-        private string GetAiAnswer(ChatAttributes attribute, ChatAnswer chatAnswer)
+        private async Task<string> GetAiAnswerAsync(ChatAttributes attribute, ChatAnswer chatAnswer)
         {
-            var block = attribute.GetCurrentAttribute<AiRoutAttributes>().LastBlockBeforeAi;
-            var gender = attribute.GetCurrentAttribute<CustomerAttributes>().Gender;
-            var botPic = attribute.GetCurrentAttribute<ContentAttributes>().BotPic;
-
-            switch (block)
+            switch (await Task.Factory.StartNew(() => attribute.GetCurrentAttribute<AiRoutAttributes>().LastBlockBeforeAi))
             {
-                case "main-menu-blck": return chatAnswer.GetYesNoAnswer(botPic);
-                case "main-no-blck": return chatAnswer.GetAfterNoAnswer(botPic, gender);
-                case "max-yes-no": return chatAnswer.GetYesNoAnswer(botPic);
-                case "mark-yes-no": return chatAnswer.GetYesNoAnswer(botPic);
-                default: return chatAnswer.GetDefaultAnswer(botPic);
+                case "main-menu-blck": return chatAnswer.GetYesNoAnswer(await Task.Factory.StartNew(() => attribute.GetCurrentAttribute<ContentAttributes>().BotPic));
+                case "main-no-blck": return chatAnswer.GetAfterNoAnswer(await Task.Factory.StartNew(() => attribute.GetCurrentAttribute<ContentAttributes>().BotPic), 
+                                                                        await Task.Factory.StartNew(() => attribute.GetCurrentAttribute<CustomerAttributes>().Gender));
+                case "max-yes-no": return chatAnswer.GetYesNoAnswer(await Task.Factory.StartNew(() => attribute.GetCurrentAttribute<ContentAttributes>().BotPic));
+                case "mark-yes-no": return chatAnswer.GetYesNoAnswer(await Task.Factory.StartNew(() => attribute.GetCurrentAttribute<ContentAttributes>().BotPic));
+                default: return chatAnswer.GetDefaultAnswer(await Task.Factory.StartNew(() => attribute.GetCurrentAttribute<ContentAttributes>().BotPic));
             }
         }
     }

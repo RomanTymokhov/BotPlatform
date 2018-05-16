@@ -7,16 +7,13 @@ using System.Threading.Tasks;
 
 namespace BotPlatform.Data.ChatAttrData
 {
-    public class MainRoutAttributes : IRoutAttributes
+    public class MainRoutAttributes : IRoutAttributes, IChatAttributes
     {
-        private static MainRoutAttributes instance;
-        private static object syncRoot = new Object();
-
         public string LastVisitedBlockName { get; private set; }
         public string LastVisitedBlockId { get; private set; }
         public string CurrentBlockName { get; private set; }
 
-        private static bool nullFlag;
+        public bool nullFlag;
 
         public MainRoutAttributes(HttpRequest Request)
         {
@@ -25,23 +22,6 @@ namespace BotPlatform.Data.ChatAttrData
             CurrentBlockName = Request.Query.FirstOrDefault(p => p.Key == "block-atr").Value;
 
             SetNullFlag();
-        }
-
-        public static void CreateInstance(HttpRequest request, List<IChatAttributes> ChatAttributesList)
-        {
-            if (instance == null)
-            {
-                lock (syncRoot)
-                {
-                    if (instance == null)
-                    {
-                        instance = new MainRoutAttributes(request);
-
-                        if (nullFlag) ChatAttributesList.Add(instance);
-                    }
-
-                }
-            }
         }
 
         private void SetNullFlag()

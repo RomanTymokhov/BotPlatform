@@ -9,30 +9,37 @@ namespace BotPlatform.Data.ChatAttrData
 {
     public class ChatAttributes
     {
-        public List<IChatAttributes> ChatAttributesList { get; private set; }
+        public List<IChatAttributes> ChatAttributesList { get; protected set; }
 
         public ChatAttributes(HttpRequest Request)
         {
             ChatAttributesList = new List<IChatAttributes>();
 
-            BehavioralAttributes.CreateInstance(Request, ChatAttributesList);
-            CustomerAttributes.CreateInstance(Request, ChatAttributesList);
-            ContentAttributes.CreateInstance(Request, ChatAttributesList);
-            MainRoutAttributes.CreateInstance(Request, ChatAttributesList);
-            UrlParamAttributes.CreateInstance(Request, ChatAttributesList);
+            AiRoutAttributes aa = new AiRoutAttributes(Request);
+            BehavioralAttributes ba = new BehavioralAttributes(Request);
+            ContentAttributes coa = new ContentAttributes(Request);
+            CustomerAttributes ca = new CustomerAttributes(Request);
+            MainRoutAttributes ma = new MainRoutAttributes(Request);
+            UrlParamAttributes ua = new UrlParamAttributes(Request);
+
+            if (aa.nullFlag) ChatAttributesList.Add(aa);
+            if (ba.nullFlag) ChatAttributesList.Add(ba);
+            if (coa.nullFlag) ChatAttributesList.Add(coa);
+            if (ca.nullFlag) ChatAttributesList.Add(ca);
+            if (ma.nullFlag) ChatAttributesList.Add(ma);
+            if (ua.nullFlag) ChatAttributesList.Add(ua);
         }
 
-        public T GetCurrentAttribute<T>()
+        public  T  GetCurrentAttribute<T>()
         {
-            T voidObject = default(T);
+            return ChatAttributesList.OfType<T>().FirstOrDefault(); ;
 
-            foreach (var item in ChatAttributesList)
-            {
-                if (item is T) voidObject = (T)item;
-                else voidObject = default(T);
-            }
-
-            return voidObject;
+                //T returnedObject = default(T);
+                //foreach (var item in ChatAttributesList)
+                //{
+                //    if (item is T) returnedObject = (T)item;
+                //}
+                //return returnedObject;
         }
 
     }

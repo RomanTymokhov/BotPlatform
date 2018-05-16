@@ -9,37 +9,17 @@ namespace BotPlatform.Data.ChatAttrData
 {
     public class BehavioralAttributes: IChatAttributes
     {
-        private static BehavioralAttributes instance;
-        private static object syncRoot = new Object();
-
         public string LastUserFreeFormInput { get; private set; }
         public string LastClickedButtonName { get; private set; }
 
-        private static bool nullFlag;
+        public bool nullFlag;
 
-        protected BehavioralAttributes(HttpRequest Request) 
+        public BehavioralAttributes(HttpRequest Request) 
         {
             LastUserFreeFormInput = Request.Query.FirstOrDefault(p => p.Key == "last user freeform input").Value;
             LastClickedButtonName = Request.Query.FirstOrDefault(p => p.Key == "last clicked button name").Value;
 
             SetNullFlag();
-        }
-
-        public static void CreateInstance(HttpRequest request, List<IChatAttributes> ChatAttributesList)
-        {
-            if (instance == null)
-            {
-                lock (syncRoot)
-                {
-                    if (instance == null)
-                    {
-                        instance = new BehavioralAttributes(request);
-
-                        if (nullFlag) ChatAttributesList.Add(instance);
-                    }
-                        
-                }
-            }
         }
 
         private void SetNullFlag()
